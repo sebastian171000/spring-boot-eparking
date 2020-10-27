@@ -27,7 +27,7 @@ public class VehiculoController {
 		model.addAttribute("vehiculo", new Vehiculo());
 		model.addAttribute("boton","Guardar");
 		model.addAttribute("titulo","Nuevo Vehículo");
-		return "vehiculo";
+		return "vehiculo/vehiculo";
 	}
 	
 	@RequestMapping("/update/{id}")
@@ -42,19 +42,19 @@ public class VehiculoController {
 		model.put("vehiculo", vehiculo);
 		model.put("boton","Actualizar");
 		model.put("titulo","Actualizar Vehículo");
-		return "vehiculo";
+		return "vehiculo/vehiculo";
 	}
 	
 	@PostMapping("/save")
 	public String saveVehiculo(@Valid Vehiculo vehiculo, BindingResult result, Model model) {
 		if(result.hasErrors()) {
-			return "vehiculo";
+			return "vehiculo/vehiculo";
 		}else {
 			model.addAttribute("mensaje", "Se guardo correctamente el vehiculo");
 			veService.insert(vehiculo);
 		}
 		model.addAttribute("listVehiculos", veService.list());
-		return "listVehiculos";
+		return "vehiculo/listVehiculos";
 	}
 	
 	@GetMapping("/list")
@@ -65,7 +65,7 @@ public class VehiculoController {
 		}catch(Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "listVehiculos";
+		return "vehiculo/listVehiculos";
 	}
 	
 	@RequestMapping("/delete")
