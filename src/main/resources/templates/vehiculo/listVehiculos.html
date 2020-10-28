@@ -2,36 +2,60 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<link th:href="@{/css/styles.css}" rel="stylesheet">
+	<link th:href="@{/css/styles.css}" rel="stylesheet">
+	<link th:href="@{/css/normalize.css}" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a0e0d9b7b0.js" crossorigin="anonymous"></script>
 </head>
 <meta charset="UTF-8"></meta>
 
 <body>
-
-	<a th:href="@{/vehiculos/new}">Nuevo vehiculo</a>
-	<table id="table-1">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Marca</th>
-				<th>Modelo</th>
-				<th>Placa</th>
-				<th>Operación</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="veh: ${listVehiculos}">
-				<td th:text="${veh.codigo}"></td>
-				<td th:text="${veh.placa}"></td>
-				<td th:text="${veh.marca}"></td>
-				<td th:text="${veh.modelo}"></td>
-				<td><a th:href="@{/vehiculos/delete?id=} + ${veh.codigo}">Eliminar</a></td>
-				<td><a th:href="@{/vehiculos/update/} + ${veh.codigo}">Actualizar</a></td>
-			</tr>
-		</tbody>
-
-	</table>
-    
+	<div class="grid-contenedor">
+		<div class="hero-nav">
+			<div class="padre-navegacion">
+				<nav class="navegacion">
+					<a th:href="@{/vehiculos/list}">Mis Vehiculos</a>
+					<a th:href="@{/reservas/list}">Reservas Cliente</a>
+					<a href="#">Reservas Administrador</a>
+				</nav>
+			</div>
+		</div>
+		
+		<div class="contenedor contenedor-listVehiculos">
+			<h1>Mis Vehículos</h1>
+			<div class="boton seccion">
+				<a th:href="@{/vehiculos/new}">Nuevo vehiculo</a>
+			</div>
+			<table class="contenedor-table">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Marca</th>
+						<th>Modelo</th>
+						<th>Placa</th>
+						<th>Operación</th>
+					</tr>
+				</thead>
+				<tbody th:if="${listVehiculos.size()} == 0">
+					<tr>
+						<td style="text-align: center;" colspan="5">No exiten registros</td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr th:each="veh: ${listVehiculos}">
+						<td th:text="${veh.codigo}"></td>
+						<td th:text="${veh.placa}"></td>
+						<td th:text="${veh.marca}"></td>
+						<td th:text="${veh.modelo}"></td>
+						<td>
+							<a th:href="@{/vehiculos/delete?id=} + ${veh.codigo}"><i class="fas fa-trash-alt"></i></a>
+							<a th:href="@{/vehiculos/update/} + ${veh.codigo}"><i class="fas fa-edit"></i></a>
+						</td>
+					</tr>
+				</tbody>
+		
+			</table>
+		</div>
+    </div>
 </body>
 
 </html>

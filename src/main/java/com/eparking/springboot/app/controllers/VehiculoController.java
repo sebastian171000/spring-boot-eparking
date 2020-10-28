@@ -48,13 +48,14 @@ public class VehiculoController {
 	@PostMapping("/save")
 	public String saveVehiculo(@Valid Vehiculo vehiculo, BindingResult result, Model model) {
 		if(result.hasErrors()) {
+			model.addAttribute("boton","Guardar");
 			return "vehiculo/vehiculo";
 		}else {
 			model.addAttribute("mensaje", "Se guardo correctamente el vehiculo");
 			veService.insert(vehiculo);
 		}
 		model.addAttribute("listVehiculos", veService.list());
-		return "vehiculo/listVehiculos";
+		return "redirect:/vehiculos/list";
 	}
 	
 	@GetMapping("/list")

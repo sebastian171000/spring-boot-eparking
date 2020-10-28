@@ -1,30 +1,60 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head></head>
+<head>
+<link th:href="@{/css/styles.css}" rel="stylesheet">
+<link th:href="@{/css/normalize.css}" rel="stylesheet">
+</head>
 <meta charset="UTF-8"></meta>
 
 <body>
-<h1 th:text="${titulo}"></h1>
-	<form th:action="@{/vehiculos/save}" th:object="${vehiculo}" method="post">
-	
-		<label for="marca">Marca:</label>
-		<input type="text" th:field="*{marca}">
-		<p th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}"></p>
+
+
+
+
+<div class="grid-contenedor">
+		<div class="hero-nav">
+			<nav class="navegacion">
+				<a th:href="@{/vehiculos/list}">Mis Vehiculos</a>
+				<a href="#">Reservas Cliente</a>
+				<a href="#">Reservas Administrador</a>
+			</nav>
+		</div>
 		
-		<label for="modelo">Modelo:</label>
-		<input type="text" th:field="*{modelo}">
-		<p th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}"></p>
-		
-		<label for="placa">Placa:</label>
-		<input type="text" th:field="*{placa}">
-		<p th:if="${#fields.hasErrors('placa')}" th:errors="*{placa}"></p>
-		
-		<input type="submit" th:value="${boton}" ></input>
-		<a th:href="@{/vehiculos/list}" >Cancelar</a>
-		
-		<input type="hidden" th:field="*{codigo}">
-	
-	</form>
+		<div class="contenedor contenedor-vehiculo">
+			<h1 th:text="${titulo}"></h1>
+			<form th:action="@{/vehiculos/save}" th:object="${vehiculo}" method="post" class="formulario">
+				<div>
+					<div>
+						<label for="marca">Marca:</label>
+						<input type="text" th:field="*{marca}">
+						<p th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}"></p>
+					</div>
+					
+					<div>
+					<label for="modelo">Modelo:</label>
+					<input type="text" th:field="*{modelo}">
+					<p th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}"></p>
+					</div>
+					
+					<div>
+					<label for="placa">Placa:</label>
+					<input type="text" th:field="*{placa}">
+					<p th:if="${#fields.hasErrors('placa')}" th:errors="*{placa}"></p>
+					</div>
+					
+					<div>
+					<input type="submit" th:value="${boton}" ></input>
+					<a th:href="@{/vehiculos/list}" >Cancelar</a>
+					</div>
+					
+					<input type="hidden" th:field="*{codigo}">
+				</div>
+			</form>
+		</div>
+    </div>
+</body>
+
+
 </body>
 </html>

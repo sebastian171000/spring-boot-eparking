@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Past;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="reserva")
@@ -23,6 +26,8 @@ public class Reserva implements Serializable {
 	@Column(name="ID_Reserva")
 	private int codigo;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Past
 	@Column(name="FechaReserva")
 	private Date fechaReserva;
 	
