@@ -4,6 +4,8 @@
 <head>
 <link th:href="@{/css/styles.css}" rel="stylesheet">
 <link th:href="@{/css/normalize.css}" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a0e0d9b7b0.js" crossorigin="anonymous"></script>
+
 </head>
 <meta charset="UTF-8"></meta>
 
@@ -15,9 +17,11 @@
 <div class="grid-contenedor">
 		<div class="hero-nav">
 			<nav class="navegacion">
-				<a th:href="@{/vehiculos/list}">Mis Vehiculos</a>
-				<a href="#">Reservas Cliente</a>
-				<a href="#">Reservas Administrador</a>
+					<a th:href="@{/home}">Inicio</a>
+					<a th:href="@{/vehiculos/list}">Mis Vehiculos</a>
+					<a th:href="@{/reservas/list}">Mis Reservas</a>
+					<a href="#">Perfil</a>
+					<a th:href="@{/logout}">Cerrar Sesion</a>
 			</nav>
 		</div>
 		
@@ -41,6 +45,7 @@
 					<label for="placa">Placa:</label>
 					<input type="text" th:field="*{placa}">
 					<p th:if="${#fields.hasErrors('placa')}" th:errors="*{placa}"></p>
+					<p th:if="${error_placa}" th:text="${error_placa}"></p>
 					</div>
 					
 					<div>
@@ -49,6 +54,8 @@
 					</div>
 					
 					<input type="hidden" th:field="*{codigo}">
+					<input type="hidden" name="usuario" th:value="${usuarioSesion.codigo}">
+					<h1 th:text="${usuarioSesion.codigo}"></h1>
 				</div>
 			</form>
 		</div>

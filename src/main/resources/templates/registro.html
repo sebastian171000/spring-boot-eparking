@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<link th:href="@{/css/styles.css}" rel="stylesheet">
+<link th:href="@{/css/normalize.css}" rel="stylesheet">
+<script src="https://kit.fontawesome.com/a0e0d9b7b0.js"
+	crossorigin="anonymous"></script>
+</head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<div class="contenedor">
+		<h1>Registro</h1>
+		<form th:action="@{/registro/save}" th:object="${usuario}"  method="post">
+			<div>
+				<div>
+					<label for="nombres">Nombres:</label> <input type="text"
+						th:field="*{nombres}">
+					<p th:if="${#fields.hasErrors('nombres')}" th:errors="*{nombres}"></p>
+				</div>
+
+				<div>
+					<label for="apellidos">Apellidos:</label> <input type="text"
+						th:field="*{apellidos}">
+					<p th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}"></p>
+				</div>
+
+				<div>
+					<label for="dni">DNI:</label> <input type="text"
+						th:field="*{dni}">
+					<p th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></p>
+				</div>
+				
+				<div>
+					<label for="correo">Correo:</label> <input type="text"
+						th:field="*{correo}">
+					<p th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}"></p>
+				</div>
+				
+				<div>
+					<label for="telefono">Telefono:</label> <input type="text"
+						th:field="*{telefono}">
+					<p th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></p>
+				</div>
+
+				<div>
+					<label for="username">Username:</label> <input type="text"
+						th:field="*{username}">
+					<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+				</div>
+				
+				<div>
+					<label for="clave">Contraseña:</label> <input type="password"
+						th:field="*{clave}">
+					<p th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}"></p>
+				</div>
+				
+				<div>
+					<input type="submit" value="Registro"></input>
+				</div>
+
+				<input type="hidden" th:field="*{codigo}">
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>

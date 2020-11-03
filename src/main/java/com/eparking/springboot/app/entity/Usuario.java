@@ -2,15 +2,14 @@ package com.eparking.springboot.app.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="usuario")
@@ -23,18 +22,35 @@ public class Usuario implements Serializable {
 	@Column(name="ID_Usuario")
 	private int codigo;
 	
-	@Column(name="usuario")
-	private String usuario;
+	@Pattern(regexp = "^[a-zA-Z0-9\\_\\-]{4,16}$", message = "Su username debe tener como mínimo 4 caracteres y no se aceptan caracter especiales")
+	@Column(name="username")
+	private String username;
 	
+	@Pattern(regexp = "^.{4,50}$", message = "Su contraseña debe tener como mínimo 4 caracteres")
 	@Column(name="clave")
 	private String clave;
 	
 	@Column(name="tipo")
 	private String tipo="C";
 	
-	@OneToOne(cascade = {CascadeType.ALL})
-	@JoinColumn(name="ID_Persona", nullable=false)
-	private Persona persona;
+	@Pattern(regexp = "^[a-zA-ZÀ-ÿ\\s]{1,40}$", message = "No se aceptan caracteres especiales ni números")
+	@Column(name="nombres")
+	private String nombres;
+	
+	@Pattern(regexp = "^[a-zA-ZÀ-ÿ\\s]{1,40}$", message = "No se aceptan caracteres especiales ni números")
+	@Column(name="apellidos")
+	private String apellidos;
+	
+	@Pattern(regexp = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", message = "El formato de su correo es incorrecto")
+	@Column(name="correo")
+	private String correo;
+	
+	@Pattern(regexp = "^\\d{7,14}$", message = "No se aceptan letras, solo números")
+	@Column(name="telefono")
+	private String telefono;
+	
+	@Column(name="dni")
+	private String dni;
 	
 	
 
@@ -44,13 +60,18 @@ public class Usuario implements Serializable {
 
 
 
-	public Usuario(int codigo, String usuario, String clave, String tipo, Persona persona) {
+	public Usuario(int codigo, String username,String clave,String tipo, String nombres,String apellidos,
+			String correo, String telefono,String dni) {
 		super();
 		this.codigo = codigo;
-		this.usuario = usuario;
+		this.username = username;
 		this.clave = clave;
 		this.tipo = tipo;
-		this.persona = persona;
+		this.nombres = nombres;
+		this.apellidos = apellidos;
+		this.correo = correo;
+		this.telefono = telefono;
+		this.dni = dni;
 	}
 
 
@@ -65,16 +86,14 @@ public class Usuario implements Serializable {
 		this.codigo = codigo;
 	}
 
-
-
-	public String getUsuario() {
-		return usuario;
+	public String getUsername() {
+		return username;
 	}
 
 
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 
@@ -103,16 +122,66 @@ public class Usuario implements Serializable {
 
 
 
-	public Persona getPersona() {
-		return persona;
+	public String getNombres() {
+		return nombres;
 	}
 
 
 
-	public void setPersona(Persona persona) {
-		this.persona = persona;
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
 	}
-	
+
+
+
+	public String getApellidos() {
+		return apellidos;
+	}
+
+
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+
+
+	public String getCorreo() {
+		return correo;
+	}
+
+
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+
+
+	public String getDni() {
+		return dni;
+	}
+
+
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
+
+
 	
 
 	

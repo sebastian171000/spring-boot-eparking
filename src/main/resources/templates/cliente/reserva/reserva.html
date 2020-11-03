@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<link th:href="@{/css/styles.css}" rel="stylesheet">
+<link th:href="@{/css/normalize.css}" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a0e0d9b7b0.js" crossorigin="anonymous"></script>
+
+</head>
+<meta charset="UTF-8"></meta>
+
+<body>
+
+
+
+
+<div class="grid-contenedor">
+	<div class="hero-nav">
+		<nav class="navegacion">
+					<a th:href="@{/home}">Inicio</a>
+					<a th:href="@{/vehiculos/list}">Mis Vehiculos</a>
+					<a th:href="@{/reservas/list}">Mis Reservas</a>
+					<a href="#">Perfil</a>
+					<a th:href="@{/logout}">Cerrar Sesion</a>
+		</nav>
+	</div>
+	
+	<div class="contenedor contenedor-reserva">
+		<h1>Nueva Reserva</h1>
+		<form th:action="@{/reservas/save}" th:object="${reserva}" method="post" class="formulario">
+			<div>
+				<div>
+					<label for="vehiculo">Vehículo: </label>
+					<select id="vehiculo" th:field="*{vehiculo}">
+						<option th:each="veh: ${listVehiculos}" th:text="${veh.modelo}" th:value="${veh.codigo}"></option>
+					</select>
+					<div th:if="${#fields.hasErrors('vehiculo')}" th:errors="*{vehiculo}"></div>
+				</div>	
+				
+				<div>
+					<label for="estacionamiento">Estacionamiento: </label>
+					<select id="estacionamiento" th:field="*{estacionamiento}">
+						<option th:each="est: ${listEstacionamientos}" th:text="${est.direccion}+' | '+${est.espacios}+' | S/'+${est.tarifa}" th:value="${est.codigo}"></option>
+					</select>
+					<div th:if="${#fields.hasErrors('estacionamiento')}" th:errors="*{estacionamiento}"></div>
+				</div>
+				
+				<div>
+					<label for="fechaReserva">Fecha: </label>
+					<input required="required" type="date" id="fechaReserva" th:field="*{fechaReserva}">
+					<div th:if="${#fields.hasErrors('fechaReserva')}">
+						<p th:errors="*{fechaReserva}"></p>
+					</div>
+				</div>	
+				
+				<div>
+					<label for="hora">Hora:</label>
+					<input type="time" th:field="*{hora}" max="22:30" min="10:00" step="00:30">
+					<p th:if="${#fields.hasErrors('hora')}" th:errors="*{hora}"></p>
+				</div>		
+							
+				<div>
+					<label for="nhora">N°horas:</label>
+					<input type="number" th:field="*{nhoras}">
+					<p th:if="${#fields.hasErrors('nhoras')}" th:errors="*{nhoras}"></p>
+				</div>
+								
+				<div>
+					<input type="submit" th:value="${boton}" ></input>
+					<a th:href="@{/reservas/list}" >Cancelar</a>
+				</div>
+				
+				<input type="hidden" th:field="*{codigo}">
+			</div>
+		</form>
+	</div>
+</div>
+</body>
+
+
+</body>
+</html>

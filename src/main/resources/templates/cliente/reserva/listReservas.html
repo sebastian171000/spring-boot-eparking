@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link th:href="@{/css/styles.css}" rel="stylesheet">
+	<link th:href="@{/css/normalize.css}" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a0e0d9b7b0.js" crossorigin="anonymous"></script>
+</head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<div class="grid-contenedor">
+		<div class="hero-nav">
+			<div class="padre-navegacion">
+				<nav class="navegacion">
+					<a th:href="@{/home}">Inicio</a>
+					<a th:href="@{/vehiculos/list}">Mis Vehiculos</a>
+					<a th:href="@{/reservas/list}">Mis Reservas</a>
+					<a href="#">Perfil</a>
+					<a th:href="@{/logout}">Cerrar Sesion</a>
+				</nav>
+			</div>
+		</div>
+		
+		<div class="contenedor contenedor-listReservas">
+			<h1>Mis Reservas</h1>
+			<a th:href="@{/reservas/list}">Reservas pendientes</a>
+			<a th:href="@{/reservas/listHistorial}">Historial de Reservas</a>
+			<div class="boton seccion">
+				<a th:href="@{/reservas/new}">Nuevo reserva</a>
+			</div>
+			<table class="contenedor-table">
+				<thead>
+					<tr>
+						<th>Id</th>
+						
+						<th>Dirección</th>
+						<th>Tarifa</th>
+						<th>Vehiculo(placa)</th>
+						<th>Fecha</th>
+						<th>Hora</th>
+						<th>N°horas</th>
+						<th>Estado</th>
+						<th>Operación</th>
+					</tr>
+				</thead>
+				<tbody th:if="${listReservas.size()} == 0">
+					<tr>
+						<td style="text-align: center;" colspan="9">No exiten registros</td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr th:each="res: ${listReservas}">
+						<td th:text="${res.codigo}"></td>
+						<td th:text="${res.estacionamiento.direccion}"></td>
+						<td th:text="${res.estacionamiento.tarifa}"></td>
+						<td th:text="${res.vehiculo.placa}"></td>
+						<td th:text="${res.fechaReserva}"></td>
+						<td th:text="${res.hora}"></td>
+						<td th:text="${res.nhoras}"></td>
+						<td th:text="${res.estado}"></td>
+						<td>
+							<a th:href="@{/reservas/delete?id=} + ${res.codigo}"><i class="fas fa-trash-alt"></i></a>
+							<a th:href="@{/reservas/update/} + ${res.codigo}"><i class="fas fa-edit"></i></a>
+						</td>
+					</tr>
+				</tbody>
+		
+			</table>
+		</div>
+    </div>
+</body>
+
+</html>

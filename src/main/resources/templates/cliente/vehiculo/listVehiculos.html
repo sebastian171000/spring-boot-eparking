@@ -13,9 +13,11 @@
 		<div class="hero-nav">
 			<div class="padre-navegacion">
 				<nav class="navegacion">
+					<a th:href="@{/home}">Inicio</a>
 					<a th:href="@{/vehiculos/list}">Mis Vehiculos</a>
-					<a th:href="@{/reservas/list}">Reservas Cliente</a>
-					<a href="#">Reservas Administrador</a>
+					<a th:href="@{/reservas/list}">Mis Reservas</a>
+					<a href="#">Perfil</a>
+					<a th:href="@{/logout}">Cerrar Sesion</a>
 				</nav>
 			</div>
 		</div>
@@ -29,9 +31,9 @@
 				<thead>
 					<tr>
 						<th>Id</th>
+						<th>Placa</th>
 						<th>Marca</th>
 						<th>Modelo</th>
-						<th>Placa</th>
 						<th>Operación</th>
 					</tr>
 				</thead>

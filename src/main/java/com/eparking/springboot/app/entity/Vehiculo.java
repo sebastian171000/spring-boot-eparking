@@ -23,21 +23,21 @@ public class Vehiculo implements Serializable {
 	@Column(name="ID_Vehiculo")
 	private int codigo;
 	
-	@NotEmpty
-	@Column(name="Placa")
+	@NotEmpty(message = "La placa es obligatoria")
+	@Column(name="Placa", unique = true)
 	private String placa;
 	
-	@NotEmpty
+	@NotEmpty(message =  "La marca es obligatoria")
 	@Column(name="Marca")
 	private String marca;
 	
-	@NotEmpty
+	@NotEmpty(message = "El modelo es obligatorio")
 	@Column(name="Modelo")
 	private String modelo;
 	
 	@ManyToOne
-	@JoinColumn(name="ID_Persona")
-	private Persona persona;
+	@JoinColumn(name="ID_Usuario")
+	private Usuario usuario;
 	
 	@Column(name="Estado")
 	private Boolean estado = false;
@@ -48,13 +48,13 @@ public class Vehiculo implements Serializable {
 	}
 
 
-	public Vehiculo(int codigo, String placa, String marca, String modelo, Persona persona, Boolean estado) {
+	public Vehiculo(int codigo, String placa, String marca, String modelo, Usuario usuario, Boolean estado) {
 		super();
 		this.codigo = codigo;
 		this.placa = placa;
 		this.marca = marca;
 		this.modelo = modelo;
-		this.persona = persona;
+		this.usuario = usuario;
 		this.estado = estado;
 	}
 
@@ -99,13 +99,13 @@ public class Vehiculo implements Serializable {
 	}
 
 
-	public Persona getPersona() {
-		return persona;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
 
-	public void setPersona(Persona persona) {
-		this.persona = persona;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 

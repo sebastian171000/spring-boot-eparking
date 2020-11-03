@@ -43,8 +43,8 @@ public class Estacionamiento implements Serializable {
 	private Distrito distrito;
 	
 	@OneToOne
-	@JoinColumn(name="ID_Persona")
-	private Persona persona ;
+	@JoinColumn(name="ID_Usuario")
+	private Usuario usuario ;
 	
 	
 
@@ -54,7 +54,7 @@ public class Estacionamiento implements Serializable {
 
 
 
-	public Estacionamiento(int codigo, String nombre, int tarifa, int espacios, Persona persona, Distrito distrito) {
+	public Estacionamiento(int codigo, String nombre, int tarifa, int espacios, Usuario usuario, Distrito distrito) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
@@ -135,14 +135,14 @@ public class Estacionamiento implements Serializable {
 
 
 
-	public Persona getPersona() {
-		return persona;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
 
 
-	public void setPersona(Persona persona) {
-		this.persona = persona;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 

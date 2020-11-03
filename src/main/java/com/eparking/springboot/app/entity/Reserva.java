@@ -11,7 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Past;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -27,16 +28,19 @@ public class Reserva implements Serializable {
 	private int codigo;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Past
+	@FutureOrPresent
 	@Column(name="FechaReserva")
 	private Date fechaReserva;
 	
+	@NotEmpty
 	@Column(name="hora")
 	private String hora;
 	
+	@NotEmpty
 	@Column(name="EstadoReserva")
 	private String estado="Pendiente";
 	
+	@NotEmpty
 	@Column(name="NumeroDeHoras")
 	private String nhoras;
 	

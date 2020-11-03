@@ -1,0 +1,201 @@
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+    /* Reset para REMS - 62.5% = 10 px de 15 px */
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.6rem;
+    line-height: 2;
+}
+
+
+/Global/
+
+img {
+    max-width: 100%;
+}
+
+.contenedor {
+    width: 95%;
+    max-width: 120rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    font-size: 3.8 rem;
+    
+}
+
+.contenedor-vehiculo h1, .contenedor-reserva h1{
+	position: absolute;
+}
+
+h2 {
+    font-size: 3.4 rem;
+}
+
+h3 {
+    font-size: 3 rem;
+}
+
+h4 {
+    font-size: 2.6 rem;
+}
+
+a{
+	text-decoration: none;
+	
+}
+label{
+	font-weight: 700;
+}
+
+/* Utilidades*/
+
+.seccion {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.centrar-text {
+    text-align: center;
+}
+
+table{
+	border-collapse: collapse;
+    border-radius: 1em;
+    overflow: hidden;
+}
+
+.contenedor-table thead tr th{
+	background-color: black;
+	margin:0;
+	padding: 10px 0;
+	width: 20rem;
+    color: white;
+}
+td{
+	padding: 10px 0;
+	text-align: center;
+	border-bottom: 2px solid white; 
+	
+}
+tr:nth-child(even) { 
+	background: #ddd;
+ }
+tr:nth-child(odd) { 
+	background: #fff;
+}
+td i{
+	color: black;
+}
+.boton a{
+	border-radius: 10px!important;
+    background-color: #fb2525;
+    color: white;
+
+    text-decoration: none;
+    padding: 10px 32px;
+}
+.grid-contenedor{
+	display: grid;
+	grid-template-columns:1fr 3fr;
+}
+.hero-nav{
+	background-color: black;
+}
+.navegacion{
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    
+
+}
+.navegacion a{
+	color: white;
+	font-size: 2rem;
+	margin-bottom: 2rem;
+}
+.navegacion a:hover{
+	color: red;
+}
+.formulario div{
+	text-align-last: justify;
+    width: 40rem;
+    margin: 0 auto;
+}
+.formulario div div:nth-child(1), .formulario div div:nth-child(2){
+	margin-bottom: 2rem;
+}
+form input{
+	border: 1px solid #a8a8a8;
+    padding: 4px;
+    margin: 1.5rem 0;
+}
+.formulario>div{
+	display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+input[type="submit"],form a {
+	background: red;
+    border: none;
+    color: white;
+    padding: .7rem 3rem;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.formulario p{
+	display: flex;
+    background-color: red;
+    margin: 0;
+    padding: 0px 10px;
+    color: white;
+    position: relative;
+}
+
+.formulario p::after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f057";
+  position: absolute;
+  right: 10px;
+}
+.contenedor-index h2{
+	color: black;
+    font-size: 35px;
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+}
+.contenedor-index p{
+	color: black;
+    font-size: 30px;
+    margin-bottom: 4rem;
+}
+.contenedor-index a{
+	background-color: #fb2525;
+    padding: 10px 20px;
+    color: white;
+    font-size: 25px;
+    border-radius: 10px;
+}
+.contenedor-index {
+	text-align: center;
+	background-image: url(../img/carro4.png);
+	background-size: 86rem;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+}

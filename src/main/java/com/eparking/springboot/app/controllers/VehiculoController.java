@@ -7,16 +7,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.eparking.springboot.app.entity.Usuario;
 import com.eparking.springboot.app.entity.Vehiculo;
 import com.eparking.springboot.app.service.IVehiculoService;
 
 @Controller
 @RequestMapping("/vehiculos")
+@SessionAttributes("usuarioSesion")
 public class VehiculoController {
 	
 	@Autowired
@@ -27,7 +31,7 @@ public class VehiculoController {
 		model.addAttribute("vehiculo", new Vehiculo());
 		model.addAttribute("boton","Guardar");
 		model.addAttribute("titulo","Nuevo Vehículo");
-		return "vehiculo/vehiculo";
+		return "cliente/vehiculo/vehiculo";
 	}
 	
 	@RequestMapping("/update/{id}")
@@ -42,31 +46,40 @@ public class VehiculoController {
 		model.put("vehiculo", vehiculo);
 		model.put("boton","Actualizar");
 		model.put("titulo","Actualizar Vehículo");
-		return "vehiculo/vehiculo";
+		return "cliente/vehiculo/vehiculo";
 	}
 	
 	@PostMapping("/save")
 	public String saveVehiculo(@Valid Vehiculo vehiculo, BindingResult result, Model model) {
-		if(result.hasErrors()) {
+		try {
+			if(result.hasErrors()) {
+				model.addAttribute("titulo","Nuevo Vehículo");
+				model.addAttribute("boton","Guardar");
+				return "cliente/vehiculo/vehiculo";
+			}else {
+				model.addAttribute("mensaje", "Se guardo correctamente el vehiculo");
+				veService.insert(vehiculo);
+			}
+		} catch (Exception e) {
+			model.addAttribute("titulo","Nuevo Vehículo");
 			model.addAttribute("boton","Guardar");
-			return "vehiculo/vehiculo";
-		}else {
-			model.addAttribute("mensaje", "Se guardo correctamente el vehiculo");
-			veService.insert(vehiculo);
+			model.addAttribute("error_placa", "La placa que ah ingresado ya existe");
+			return "cliente/vehiculo/vehiculo";
 		}
+		
 		model.addAttribute("listVehiculos", veService.list());
 		return "redirect:/vehiculos/list";
 	}
 	
 	@GetMapping("/list")
-	public String listVehiculos(Model model) {
+	public String listVehiculos(@ModelAttribute("usuarioSesion") Usuario usuario,Model model) {
 		try {
 			model.addAttribute("vehiculo", new Vehiculo());
-			model.addAttribute("listVehiculos", veService.list());
+			model.addAttribute("listVehiculos", veService.listByUser(usuario));
 		}catch(Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "vehiculo/listVehiculos";
+		return "cliente/vehiculo/listVehiculos";
 	}
 	
 	@RequestMapping("/delete")

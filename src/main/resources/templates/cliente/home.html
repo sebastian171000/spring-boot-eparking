@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link th:href="@{/css/styles.css}" rel="stylesheet">
+	<link th:href="@{/css/normalize.css}" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a0e0d9b7b0.js" crossorigin="anonymous"></script>
+</head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<div class="grid-contenedor">
+		<div class="hero-nav">
+			<div class="padre-navegacion">
+				<nav class="navegacion">
+					<a th:href="@{/home}">Inicio</a>
+					<a th:href="@{/vehiculos/list}">Mis Vehiculos</a>
+					<a th:href="@{/reservas/list}">Mis Reservas</a>
+					<a href="#">Perfil</a>
+					<a th:href="@{/logout}">Cerrar Sesion</a>
+				</nav>
+			</div>
+		</div>
+		<div class="contenedor contenedor-index">
+			<h2 th:text="Bienvenido+' '+${nombres}+' '+${apellidos}"></h2>
+			<p>¿Para donde vamos?</p>
+			<a th:href="@{reservas/list}">Reservar</a>
+		</div>
+	</div>
+	
+	
+</body>
+
+</html>

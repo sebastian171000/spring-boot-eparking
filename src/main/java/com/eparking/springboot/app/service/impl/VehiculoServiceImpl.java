@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.eparking.springboot.app.entity.Usuario;
 import com.eparking.springboot.app.entity.Vehiculo;
 import com.eparking.springboot.app.repository.IVehiculoRepository;
 import com.eparking.springboot.app.service.IVehiculoService;
@@ -19,9 +20,7 @@ public class VehiculoServiceImpl implements IVehiculoService {
 	@Override
 	@Transactional
 	public void insert(Vehiculo vehiculo) {
-		/*if(vehiculo.getCodigo() > 0) {
-			veR.merge(vehiculo);
-		}*/
+
 		veR.save(vehiculo);
 	}
 
@@ -40,6 +39,12 @@ public class VehiculoServiceImpl implements IVehiculoService {
 	@Override
 	public Vehiculo findOne(Integer idVehiculo) {
 		return veR.findOne(idVehiculo);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Vehiculo> listByUser(Usuario usuario) {
+		return veR.listByUser(usuario);
 	}
 
 }
