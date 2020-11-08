@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<link th:href="@{/css/styles.css}" rel="stylesheet">
+<link th:href="@{/css/normalize.css}" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a0e0d9b7b0.js" crossorigin="anonymous"></script>
+
+</head>
+<meta charset="UTF-8"></meta>
+
+<body class="overflow-hidden">
+
+    <header class="hero-header-menu desktop">
+        <div class="contenedor contenedor-menu">
+            <div class="contenido-menu">
+                <nav class="menu">
+                    <a th:href="@{/home}">Inicio</a>
+					<a th:href="@{/vehiculos/list}">Mis Vehiculos</a>
+					<a th:href="@{/reservas/list}">Mis Reservas</a>
+					<a th:href="@{/cuenta}">Perfil</a>
+					<a th:href="@{/logout}">Cerrar Sesion</a>
+                </nav>
+                <div class="menu-perfil">
+                    <p th:text="${usuarioSesion.username}"></p>
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="fondo-imagen-registro-cliente">
+        <div class="hero-registro color-listado-clientes detalle-padding verReserva">
+        <!-- VISTA ADMINISTRADOR -->
+            <div th:if="${usuarioSesion.tipo} == 'A'" class="contenedor" th:object="${verReserva}">
+                <h2>Detalle Reserva</h2>
+                <div class="grid-registro grid-detalleCliente">
+                    <div class="hero-detalle verReserva-grid">
+                    	<h3>Datos personales del cliente</h3>
+                        <div class="fila-detalle">
+                        	<p>Nombres y Apellidos:</p>
+                            <p th:text="*{vehiculo.usuario.nombres}+' '+*{vehiculo.usuario.apellidos}"></p>
+                        </div>
+                        <div class="fila-detalle">
+                        	<p>Telefono:</p>
+                            <p th:text="*{vehiculo.usuario.telefono}"></p>
+                        </div>
+                        <div class="fila-detalle">
+                        	<p>Correo:</p>
+                            <p th:text="*{vehiculo.usuario.correo}"></p>
+                        </div>
+                        <h3>Datos del vehiculo</h3>
+                        <div class="fila-detalle">
+                        	<p>Marca:</p>
+                            <p th:text="*{vehiculo.marca}"></p>
+                        </div>
+                        <div class="fila-detalle">
+                        	<p>Modelo:</p>
+                            <p th:text="*{vehiculo.modelo}"></p>
+                        </div>
+                        <div class="fila-detalle">
+                        	<p>Placa:</p>
+                            <p th:text="*{vehiculo.placa}"></p>
+                        </div>
+
+                        <h3>Detalles de la reserva</h3>
+                        <div class="fila-detalle">
+                        	<p>Fecha de Reserva:</p>
+                            <p th:text="*{fechaReserva}"></p>
+                        </div>
+                        <div class="fila-detalle">
+                        	<p>Hora de la reserva:</p>
+                            <p th:text="*{hora}"></p>
+                        </div>
+                        <div class="fila-detalle">
+                        	<p>Estado de reserva:</p>
+                            <p th:text="*{estado}"></p>
+                        </div>
+                        <div class="fila-detalle">
+                        	<p>Duración de la reserva:</p>
+                            <p th:text="*{nhoras}"></p>
+                        </div>
+                        <div class="fila-detalle">
+                        	<p>Costo total:</p>
+                            <p th:text="'S/'+*{estacionamiento.tarifa * nhoras}"></p>
+                        </div>
+                    </div>
+
+                    <div class="imagen-detalle centrar-text">
+ 						<!--<img th:src="@{*{'/img/' + usuario.imagen}}" title="TODO" />-->
+ 						<img th:src="@{*{'/multipartFile/' + vehiculo.usuario.imagen}}" title="TODO" />
+
+                    </div>
+
+                </div>
+                <div class="right-text btn">
+                    <a th:if="*{estado != 'Rechazado' AND estado != 'Finalizado'}" 
+                    th:href="@{/reservas/list}">Volver</a>
+                    <a th:if="*{estado == 'Rechazado' OR estado == 'Finalizado'}" 
+                    th:href="@{/reservas/listHistorial}">Volver</a>
+                </div>
+            </div><!-- FIN VISTA ADMINISTRADOR -->
+            <!-- VISTA CLIENTE -->
+            <div th:if="${usuarioSesion.tipo} == 'C'" class="contenedor" th:object="${verReserva}">
+                <h2>Detalle Reserva</h2>
+                <div class="grid-registro grid-detalleCliente">
+                    <div class="hero-detalle verReserva-grid">
+                    	<div>
+	                    	<h3>Datos personales del encargado</h3>
+	                        <div class="fila-detalle">
+	                        	<p>Nombres y Apellidos:</p>
+	                            <p th:text="*{estacionamiento.usuario.nombres}+' '+*{estacionamiento.usuario.apellidos}"></p>
+	                        </div>
+	                        <div class="fila-detalle">
+	                        	<p>Telefono:</p>
+	                            <p th:text="*{estacionamiento.usuario.telefono}"></p>
+	                        </div>
+	                        <div class="fila-detalle">
+	                        	<p>Correo:</p>
+	                            <p th:text="*{estacionamiento.usuario.correo}"></p>
+	                        </div>
+                        </div>
+                        <div>
+	                        <h3>Datos del Vehiculo</h3>
+	                        <div class="fila-detalle">
+	                        	<p>Marca:</p>
+	                            <p th:text="*{vehiculo.marca}"></p>
+	                        </div>
+	                        <div class="fila-detalle">
+	                        	<p>Modelo:</p>
+	                            <p th:text="*{vehiculo.modelo}"></p>
+	                        </div>
+	                        <div class="fila-detalle">
+	                        	<p>Placa:</p>
+	                            <p th:text="*{vehiculo.placa}"></p>
+	                        </div>
+
+	                        
+                        </div>
+                        <div>
+	                        <h3>Detalle Reserva</h3>
+	                        <div class="fila-detalle">
+	                        	<p>Fecha de reserva:</p>
+	                            <p th:text="*{#dates.format(fechaReserva, 'dd-MMM-yyyy')}"></p>
+	                        </div>
+	                        <div class="fila-detalle">
+	                        	<p>Hora de la reserva:</p>
+	                            <p th:text="*{hora}"></p>
+	                        </div>
+	                        <div class="fila-detalle">
+	                        	<p>Estado de reserva:</p>
+	                            <p th:text="*{estado}"></p>
+	                        </div>
+           	                <div class="fila-detalle">
+	                        	<p>Tarifa:</p>
+	                            <p th:text="'S/'+*{estacionamiento.tarifa}+' x hora'"></p>
+	                        </div>
+	                        <div class="fila-detalle">
+	                        	<p>Duración de la reserva:</p>
+	                            <p th:text="*{nhoras}"></p>
+	                        </div>
+	                        <div class="fila-detalle">
+	                        	<p>Costo total:</p>
+	                            <p th:text="'S/'+*{estacionamiento.tarifa * nhoras}"></p>
+	                        </div>
+	                        
+	                        
+                        </div>
+                    </div>
+
+                    <div class="imagen-detalle centrar-text">
+ 						<!--<img th:src="@{*{'/img/' + usuario.imagen}}" title="TODO" />-->
+ 						<img th:src="@{*{'/multipartFile/' + estacionamiento.usuario.imagen}}" title="TODO" />
+
+                    </div>
+
+                </div>
+                <div class="right-text btn">
+                    <a th:if="*{estado == 'Rechazado' OR estado == 'Finalizado'}" 
+                    th:href="@{/reservas/listHistorial}">Volver</a>
+                    <a th:if="*{estado != 'Rechazado' AND estado != 'Finalizado'}" 
+                    th:href="@{/reservas/list}">Volver</a>
+                </div>
+            </div><!-- FIN VISTA CLIENTE -->
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script src="../js/app.js"></script>
+</body>
+
+
+</html>
