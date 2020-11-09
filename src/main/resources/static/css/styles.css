@@ -762,3 +762,101 @@ table a{
 	color: #41444b;
 	text-decoration: underline;
 }
+.form-registro-estacionamiento .registro-contenido label{
+	    margin-bottom: -10px;
+}
+.form-registro-estacionamiento .grid-registro .checkbox{
+	    margin-top: -1rem!important;
+}
+.home-administrador .contenedor-home h2 {
+    color: black;
+    font-size: 30px;
+    margin: 0;
+}
+.home-administrador .contenedor-home p {
+    color: black;
+    margin: 0;
+    line-height: 32px;
+    font-size: 25px;
+}
+.home-administrador form{
+    margin: 3rem 0;
+}
+.verReserva .fila-detalle{
+	margin-bottom: -2rem;
+}
+.verReserva h3{
+	font-size: 2rem;
+    line-height: 20px;
+    color: #f8a000;
+    margin-bottom: 0rem;
+}
+/*.verReserva-grid{
+	display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem; 
+}
+.verReserva-grid div:nth-child(3){
+	grid-column: 1/3;
+}*/
+.verReserva-grid{
+	overflow-y: scroll;
+    height: 57vh;
+}
+.verReserva{
+	margin-top: 7rem!important;
+}
+.verReserva-grid::-webkit-scrollbar {
+    width: 7px;
+    /* width of the entire scrollbar */
+}
+
+.verReserva-grid::-webkit-scrollbar-track {
+    background: white;
+    border: 1px solid #41444b;
+    border-radius: 5px;
+    /* color of the tracking area */
+}
+
+.verReserva-grid::-webkit-scrollbar-thumb {
+    background-color: #fddb3a;
+    border-radius: 5px;
+}
+.verReserva .fila-detalle p:first-of-type{
+	margin-right: 2rem;
+}
+.swal-wide-reserva{
+	zoom:1.3;
+}
+.swal-wide-reserva li{
+	list-style: none;
+	font-size: 14px;
+}
+.swal-wide-reserva ul {
+	text-align: center;
+	padding: 0;
+}
+.error{
+	border-bottom: 2px solid #ff1717!important;
+}
+.swal-wide-registro,.swal-wide-registro-alerta{
+	zoom:1.3;
+}
+.swal-wide-registro ul li{
+    list-style: none;
+    text-align: left;
+    font-size: 13px;
+    margin-bottom: 5px;
+    position: relative;
+    
+}
+.swal-wide-registro ul li::before{
+	font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f00d";
+    color: red;
+    position: absolute;
+    left: -20px;
+    bottom: 0px;
+    font-size: 12px;
+}
