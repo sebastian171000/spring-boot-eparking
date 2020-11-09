@@ -23,24 +23,19 @@ public class Vehiculo implements Serializable {
 	@Column(name="ID_Vehiculo")
 	private int codigo;
 	
-	@NotEmpty
-	@Column(name="Placa")
+	@NotEmpty(message = "La placa es obligatoria")
+	@Column(name="Placa", unique = true)
 	private String placa;
 	
-	@NotEmpty
-	@Column(name="Marca")
-	private String marca;
+	@ManyToOne
+	@JoinColumn(name="ID_Usuario")
+	private Usuario usuario;
 	
-	@NotEmpty
-	@Column(name="Modelo")
-	private String modelo;
 	
 	@ManyToOne
-	@JoinColumn(name="ID_Persona")
-	private Persona persona;
+	@JoinColumn(name = "ID_Modelo")
+	private Modelo modelo;
 	
-	@Column(name="Estado")
-	private Boolean estado = false;
 	
 
 	public Vehiculo() {
@@ -48,15 +43,16 @@ public class Vehiculo implements Serializable {
 	}
 
 
-	public Vehiculo(int codigo, String placa, String marca, String modelo, Persona persona, Boolean estado) {
+
+	public Vehiculo(int codigo, @NotEmpty(message = "La placa es obligatoria") String placa, Usuario usuario,
+			Modelo modelo) {
 		super();
 		this.codigo = codigo;
 		this.placa = placa;
-		this.marca = marca;
+		this.usuario = usuario;
 		this.modelo = modelo;
-		this.persona = persona;
-		this.estado = estado;
 	}
+
 
 
 	public int getCodigo() {
@@ -64,9 +60,11 @@ public class Vehiculo implements Serializable {
 	}
 
 
+
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
+
 
 
 	public String getPlaca() {
@@ -74,61 +72,35 @@ public class Vehiculo implements Serializable {
 	}
 
 
+
 	public void setPlaca(String placa) {
 		this.placa = placa;
 	}
 
 
-	public String getMarca() {
-		return marca;
+
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
 
-	public void setMarca(String marca) {
-		this.marca = marca;
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 
-	public String getModelo() {
+
+	public Modelo getModelo() {
 		return modelo;
 	}
 
 
-	public void setModelo(String modelo) {
+
+	public void setModelo(Modelo modelo) {
 		this.modelo = modelo;
 	}
 
-
-	public Persona getPersona() {
-		return persona;
-	}
-
-
-	public void setPersona(Persona persona) {
-		this.persona = persona;
-	}
-
-
-	public Boolean getEstado() {
-		return estado;
-	}
-
-
-	public void setEstado(Boolean estado) {
-		this.estado = estado;
-	}
-
-
-	
-
-
-	
-
-	
-
-	
-
-	
 	
 }
 
