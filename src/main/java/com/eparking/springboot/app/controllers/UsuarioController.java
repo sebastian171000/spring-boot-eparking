@@ -1,5 +1,6 @@
 package com.eparking.springboot.app.controllers;
 
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,30 +42,28 @@ public class UsuarioController {
 		return "administrador/registro";
 	}
 	@PostMapping("/registro/save")
-	public String save(@Valid Usuario usuario, BindingResult result, Model model,@RequestParam("imageFile") MultipartFile imageFile) throws Exception {
-		if(result.hasErrors()) {
-			return "cliente/registro";
-		}else {
-			model.addAttribute("mensaje", "Se guardo correctamente el usuario");
-			usuario.setImagen(imageFile.getOriginalFilename());
-			usService.insert(usuario,imageFile);
-		}
+	public String save(Usuario usuario, Model model,@RequestParam("imageFile") MultipartFile imageFile) throws Exception {
+		model.addAttribute("mensaje", "Se guardo correctamente el usuario");
+		usuario.setImagen(imageFile.getOriginalFilename());
+		usService.insert(usuario,imageFile);
 		return "redirect:/login";
 	}
 	
 	@PostMapping("/registroEstacionamiento/save") 
-	public String saveEstacionamiento(@Valid Estacionamiento estacionamiento, BindingResult result, Model model,@RequestParam("imageFile") MultipartFile imageFile) throws Exception {
+	public String saveEstacionamiento(@Valid Estacionamiento estacionamiento, BindingResult result, Model model,@RequestParam(name = "imageFile",required = false) MultipartFile imageFile) throws Exception {
 		if(result.hasErrors()) {
 			return "administrador/registro";
 		}else {
 			model.addAttribute("mensaje", "Se guardo correctamente el usuario y estacionamiento");
-			//usuario.setTipo("A");
 			estacionamiento.getUsuario().setTipo("A");
 			estacionamiento.setEspacios_disponibles(estacionamiento.getEspacios());
-			//usuario.setImagen(imageFile.getOriginalFilename());
-			estacionamiento.getUsuario().setImagen(imageFile.getOriginalFilename());
-			//usService.insert(usuario,imageFile);
-			esService.insertWithImage(estacionamiento, imageFile);
+			if(!imageFile.getOriginalFilename().equals("")) {
+				estacionamiento.getUsuario().setImagen(imageFile.getOriginalFilename());
+				esService.insertWithImage(estacionamiento, imageFile);
+			}else {
+				esService.insert(estacionamiento);
+			}
+			
 		}
 		return "redirect:/login";
 	}
