@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.FutureOrPresent;
+//import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,11 +28,11 @@ public class Reserva implements Serializable {
 	private int codigo;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@FutureOrPresent
+	//@FutureOrPresent
 	@Column(name="FechaReserva")
 	private Date fechaReserva;
 	
-	@NotEmpty
+	//@NotEmpty
 	@Column(name="hora")
 	private String hora;
 	
@@ -40,11 +40,11 @@ public class Reserva implements Serializable {
 	@Column(name="EstadoReserva")
 	private String estado="Pendiente";
 	
-	@NotEmpty
+	
 	@Column(name="NumeroDeHoras")
-	private String nhoras;
+	private int nhoras;
 	
-	
+
 	@ManyToOne
 	@JoinColumn(name="ID_Vehiculo")
 	private Vehiculo vehiculo;
@@ -63,7 +63,7 @@ public class Reserva implements Serializable {
 
 
 
-	public Reserva(int codigo, Date fechaReserva, String hora, String estado, String nhoras, Vehiculo vehiculo,
+	public Reserva(int codigo, Date fechaReserva, String hora, String estado, int nhoras, Vehiculo vehiculo,
 			Estacionamiento estacionamiento) {
 		super();
 		this.codigo = codigo;
@@ -134,14 +134,18 @@ public class Reserva implements Serializable {
 
 
 
-	public String getNhoras() {
+	
+
+
+
+	public int getNhoras() {
 		return nhoras;
 	}
 
 
 
 
-	public void setNhoras(String nhoras) {
+	public void setNhoras(int nhoras) {
 		this.nhoras = nhoras;
 	}
 

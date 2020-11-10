@@ -2,6 +2,7 @@ package com.eparking.springboot.app.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 //import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,8 +25,8 @@ public class Estacionamiento implements Serializable {
 	@Column(name="ID_Estacionamiento")
 	private int codigo;
 	
-	@Column(name="nombre")
-	private String nombre;
+	//@Column(name="nombre")
+	//private String nombre;
 	
 	@Column(name="tarifa")
 	private int tarifa;
@@ -36,13 +37,26 @@ public class Estacionamiento implements Serializable {
 	@Column(name="direccion")
 	private String direccion;
 	
+	@Column(name="espacios_disponibles")
+	private int espacios_disponibles;
 	
+	@Column(name = "hora_apertura")
+	private String horaApertura = "7:00";
+	
+	@Column(name = "hora_cierre")
+	private String horaCierre = "22:00";
+	
+	@Column(name = "anticipacion_horas")
+	private int anticipacionHoras = 1;
+	 
+	@Column(name = "anticipacion_dias")
+	private int anticipacionDias = 0;
 	
 	@ManyToOne
-	@JoinColumn(name="ID_Distrito",nullable=false)
+	@JoinColumn(name="ID_Distrito",nullable=true)
 	private Distrito distrito;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name="ID_Usuario")
 	private Usuario usuario ;
 	
@@ -54,14 +68,30 @@ public class Estacionamiento implements Serializable {
 
 
 
-	public Estacionamiento(int codigo, String nombre, int tarifa, int espacios, Usuario usuario, Distrito distrito) {
+	
+
+
+
+	public Estacionamiento(int codigo, int tarifa, int espacios, String direccion, int espacios_disponibles,
+			String horaApertura, String horaCierre, int anticipacionHoras, int anticipacionDias, Distrito distrito,
+			Usuario usuario) {
 		super();
 		this.codigo = codigo;
-		this.nombre = nombre;
 		this.tarifa = tarifa;
 		this.espacios = espacios;
+		this.direccion = direccion;
+		this.espacios_disponibles = espacios_disponibles;
+		this.horaApertura = horaApertura;
+		this.horaCierre = horaCierre;
+		this.anticipacionHoras = anticipacionHoras;
+		this.anticipacionDias = anticipacionDias;
 		this.distrito = distrito;
+		this.usuario = usuario;
 	}
+
+
+
+
 
 
 
@@ -77,15 +107,7 @@ public class Estacionamiento implements Serializable {
 
 
 
-	public String getNombre() {
-		return nombre;
-	}
-
-
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+	
 
 
 
@@ -147,6 +169,66 @@ public class Estacionamiento implements Serializable {
 
 
 
+	public int getEspacios_disponibles() {
+		return espacios_disponibles;
+	}
+
+
+
+	public void setEspacios_disponibles(int espacios_disponibles) {
+		this.espacios_disponibles = espacios_disponibles;
+	}
+
+
+
+	public String getHoraApertura() {
+		return horaApertura;
+	}
+
+
+
+	public void setHoraApertura(String horaApertura) {
+		this.horaApertura = horaApertura;
+	}
+
+
+
+	public String getHoraCierre() {
+		return horaCierre;
+	}
+
+
+
+	public void setHoraCierre(String horaCierre) {
+		this.horaCierre = horaCierre;
+	}
+
+
+
+	public int getAnticipacionHoras() {
+		return anticipacionHoras;
+	}
+
+
+
+	public void setAnticipacionHoras(int anticipacionHoras) {
+		this.anticipacionHoras = anticipacionHoras;
+	}
+
+
+
+	public int getAnticipacionDias() {
+		return anticipacionDias;
+	}
+
+
+
+	public void setAnticipacionDias(int anticipacionDias) {
+		this.anticipacionDias = anticipacionDias;
+	}
+
+
+	
 	
 	
 	

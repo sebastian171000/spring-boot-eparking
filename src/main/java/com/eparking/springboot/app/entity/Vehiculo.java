@@ -101,6 +101,23 @@ public class Vehiculo implements Serializable {
 		this.modelo = modelo;
 	}
 
+
+
+	
+
+
+	
+
+	
+
+
+	
+
+	
+
+	
+
+	
 	
 }
 

@@ -49,8 +49,8 @@ public class Usuario implements Serializable {
 	@Column(name="telefono")
 	private String telefono;
 	
-	@Column(name="dni")
-	private String dni;
+	@Column(name="imagen")
+	private String imagen;
 	
 	
 
@@ -61,7 +61,7 @@ public class Usuario implements Serializable {
 
 
 	public Usuario(int codigo, String username,String clave,String tipo, String nombres,String apellidos,
-			String correo, String telefono,String dni) {
+			String correo, String telefono,String imagen) {
 		super();
 		this.codigo = codigo;
 		this.username = username;
@@ -71,7 +71,7 @@ public class Usuario implements Serializable {
 		this.apellidos = apellidos;
 		this.correo = correo;
 		this.telefono = telefono;
-		this.dni = dni;
+		this.imagen = imagen;
 	}
 
 
@@ -170,15 +170,19 @@ public class Usuario implements Serializable {
 
 
 
-	public String getDni() {
-		return dni;
+	public String getImagen() {
+		return imagen;
 	}
 
 
 
-	public void setDni(String dni) {
-		this.dni = dni;
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
+
+
+
+	
 
 
 
@@ -194,4 +198,3 @@ public class Usuario implements Serializable {
 	
 	
 }
-
