@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eparking.springboot.app.entity.Estacionamiento;
 import com.eparking.springboot.app.entity.Reserva;
@@ -34,7 +35,12 @@ public class ReservaController {
 	private IEstacionamientoService esService;
 	
 	@GetMapping("/new/{es}")
-	public String newReserva(@PathVariable() Integer es,@ModelAttribute("usuarioSesion") Usuario usuario,Model model) {
+	public String newReserva(@PathVariable() Integer es,@ModelAttribute("usuarioSesion") Usuario usuario,Model model
+			,RedirectAttributes flash) {
+		if(usuario.getTipo().equals("A")) {
+			flash.addFlashAttribute("permiso", "cliente");
+			return "redirect:/home";
+		}
 		model.addAttribute("reserva", new Reserva());
 		model.addAttribute("boton","Guardar");
 		model.addAttribute("titulo","Nuevo Vehículo");
@@ -45,8 +51,12 @@ public class ReservaController {
 	}
 	
 	@RequestMapping("/update/{id}")
-	public String update(@PathVariable(value = "id") Integer id,Map<String, Object> model) {
-		
+	public String update(@PathVariable(value = "id") Integer id,@ModelAttribute("usuarioSesion") Usuario usuario, 
+			Map<String, Object> model, RedirectAttributes flash) {
+		if(usuario.getTipo().equals("A")) {
+			flash.addFlashAttribute("permiso", "cliente");
+			return "redirect:/home";
+		}
 		Reserva reserva = null;
 		if(id>0) {
 			reserva = reService.findOne(id);
@@ -58,11 +68,16 @@ public class ReservaController {
 		model.put("reserva", reserva);
 		model.put("boton","Actualizar");
 		model.put("titulo","Actualizar Vehículo");
-		return "cliente/reserva/reserva";
+		return "cliente/reserva/reservaUpdate";
 	}
 	
 	@RequestMapping("/detalleEstacionamiento/{id}")
-	public String detalleEstacionamiento(@PathVariable(value = "id") Integer id, Model model) {
+	public String detalleEstacionamiento(@PathVariable(value = "id") Integer id, @ModelAttribute("usuarioSesion") Usuario usuario,
+			Model model, RedirectAttributes flash) {
+		if(usuario.getTipo().equals("A")) {
+			flash.addFlashAttribute("permiso", "cliente");
+			return "redirect:/home";
+		}
 		Estacionamiento estacionamiento = null;
 		if(id>0) {
 			estacionamiento = esService.findOne(id);
@@ -121,7 +136,12 @@ public class ReservaController {
 	}
 	
 	@RequestMapping("/delete")
-	public String delete(Map<String, Object> model, @RequestParam(value="id") Integer id) {
+	public String delete(@ModelAttribute("usuarioSesion") Usuario usuario, Map<String, Object> model, 
+			@RequestParam(value="id") Integer id, RedirectAttributes flash) {
+		if(usuario.getTipo().equals("A")) {
+			flash.addFlashAttribute("permiso", "cliente");
+			return "redirect:/home";
+		}
 		try {
 			if(id!=null && id>0) {
 				reService.delete(id);
@@ -136,7 +156,12 @@ public class ReservaController {
 	}
 	
 	@GetMapping("/aprobar")
-	public String aprobar(Model model, @RequestParam(value="id") Integer id) {
+	public String aprobar(@ModelAttribute("usuarioSesion") Usuario usuario, Model model, 
+			@RequestParam(value="id") Integer id, RedirectAttributes flash) {
+		if(usuario.getTipo().equals("C")) {
+			flash.addFlashAttribute("permiso", "administrador");
+			return "redirect:/home";
+		}
 		try {
 			Reserva reserva = null;
 			int espaciosD;
@@ -156,7 +181,12 @@ public class ReservaController {
 	}
 	
 	@GetMapping("/rechazar")
-	public String rechazar(Model model, @RequestParam(value="id") Integer id) {
+	public String rechazar(@ModelAttribute("usuarioSesion") Usuario usuario, Model model, 
+			@RequestParam(value="id") Integer id, RedirectAttributes flash) {
+		if(usuario.getTipo().equals("C")) {
+			flash.addFlashAttribute("permiso", "administrador");
+			return "redirect:/home";
+		}
 		try {
 			Reserva reserva = null;
 			
@@ -173,7 +203,12 @@ public class ReservaController {
 	}
 	
 	@GetMapping("/finalizar")
-	public String finalizar(Model model, @RequestParam(value="id") Integer id) {
+	public String finalizar(@ModelAttribute("usuarioSesion") Usuario usuario, Model model, 
+			@RequestParam(value="id") Integer id, RedirectAttributes flash) {
+		if(usuario.getTipo().equals("C")) {
+			flash.addFlashAttribute("permiso", "administrador");
+			return "redirect:/home";
+		}
 		try {
 			Reserva reserva = null;
 			int espaciosD;
@@ -197,11 +232,7 @@ public class ReservaController {
 		try {
 			if(id!=null && id>0) {
 				reserva = reService.findOne(id);
-				model.addAttribute("verReserva",reserva);
-				//String tarifa = reserva.getNhoras();
-				//int tarifaEntero = Integer.parseInt(tarifa);
-				//model.addAttribute("tarifaEntero",tarifaEntero);
-				
+				model.addAttribute("verReserva",reserva);				
 				pagina = "verReserva";
 				
 			}
@@ -213,4 +244,3 @@ public class ReservaController {
 	}
 	
 }
-
