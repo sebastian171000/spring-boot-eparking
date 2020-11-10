@@ -14,17 +14,10 @@
     <header class="hero-header-menu desktop">
         <div class="contenedor contenedor-menu">
             <div class="contenido-menu">
-                <nav th:if="${usuarioSesion.tipo == 'C'}" class="menu">
+                <nav class="menu">
                     <a th:href="@{/home}">Inicio</a>
 					<a th:href="@{/vehiculos/list}">Mis Vehiculos</a>
 					<a th:href="@{/reservas/list}">Mis Reservas</a>
-					<a th:href="@{/cuenta}">Perfil</a>
-					<a th:href="@{/logout}">Cerrar Sesion</a>
-                </nav>
-                <nav th:if="${usuarioSesion.tipo == 'A'}" class="menu">
-                	<a th:href="@{/home}">Inicio</a>
-					<a th:href=@{/reservas/list}>Reservas</a>
-					<a th:href="@{/estacionamiento}">Estacionamiento</a>
 					<a th:href="@{/cuenta}">Perfil</a>
 					<a th:href="@{/logout}">Cerrar Sesion</a>
                 </nav>
@@ -37,39 +30,41 @@
     </header>
     <div class="fondo-imagen-registro-cliente">
         <div class="hero-registro color-listado-clientes detalle-padding">
-            <div class="contenedor" th:object="${usuarioSesion}">
-                <h2 th:if="*{tipo == 'C'}">Perfil Cliente</h2>
-                <h2 th:if="*{tipo == 'A'}">Perfil Administrador</h2>
+            <div class="contenedor" th:object="${estacionamiento}">
+                <h2>Detalle Estacionamiento</h2>
                 <div class="grid-registro grid-detalleCliente">
                     <div class="hero-detalle">
                         <div class="fila-detalle">
                             <i class="fas fa-user"></i>
-                            <p th:text="*{nombres}+' '+*{apellidos}"></p>
+                            <p th:text="*{usuario.nombres}+' '+*{usuario.apellidos}"></p>
                         </div>
                         <div class="fila-detalle">
-                            <i class="fas fa-mobile"></i>
-                            <p th:text="*{telefono}"></p>
+                            <i class="fas fa-map-marked-alt"></i>
+                            <p th:text="*{direccion}+', '+*{distrito.nombre}"></p>
                         </div>
                         <div class="fila-detalle">
-                            <i class="fas fa-user-circle"></i>
-                            <p th:text="*{username}"></p>
+                            <i class="fas fa-coins"></i>
+                            <p th:text="'S/ '+*{tarifa}+ ' x hora'"></p>
                         </div>
                         <div class="fila-detalle">
-                            <i class="fas fa-paper-plane"></i>
-                            <p th:text="*{correo}"></p>
+                            <i class="fas fa-car"></i>
+                            <p th:text="*{espacios_disponibles}+' espacios disponibles'"></p>
                         </div>
-                        
+                        <div class="fila-detalle">
+                            <i class="fas fa-clock"></i>
+                            <p th:text="*{horaApertura}+' - '+*{horaCierre}"></p>
+                        </div>
                     </div>
 
                     <div class="imagen-detalle centrar-text">
- 						<img th:if="*{imagen}" th:src="@{*{'/multipartFile/' + imagen}}" title="TODO" />
- 						<!--<img th:src="*{imagen}" title="TODO" /> -->
+ 						<!--<img th:src="@{*{'/img/' + usuario.imagen}}" title="TODO" />-->
+ 						<img th:if="*{usuario.imagen}" th:src="@{*{'/multipartFile/' + usuario.imagen}}" title="TODO" />
 
                     </div>
 
                 </div>
                 <div class="right-text btn">
-                    <a th:href="@{/home}">Volver</a>
+                    <a th:href="@{/reservas/new/}+*{codigo}">Volver</a>
                 </div>
             </div>
         </div>

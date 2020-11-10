@@ -860,3 +860,7 @@ table a{
     bottom: 0px;
     font-size: 12px;
 }
+#log2{
+	font-weight: 600;
+    color: green;
+}

@@ -8,56 +8,76 @@
 </head>
 <meta charset="UTF-8"></meta>
 
-<body>
-	<div class="grid-contenedor">
-		<div class="hero-nav">
-			<div class="padre-navegacion">
-				<nav class="navegacion">
-					<a th:href="@{/home}">Inicio</a>
+<body class="overflow-hidden">
+
+    <header class="hero-header-menu desktop">
+        <div class="contenedor contenedor-menu">
+            <div class="contenido-menu">
+                <nav class="menu">
+                    <a th:href="@{/home}">Inicio</a>
 					<a th:href="@{/vehiculos/list}">Mis Vehiculos</a>
 					<a th:href="@{/reservas/list}">Mis Reservas</a>
-					<a href="#">Perfil</a>
+					<a th:href="@{/cuenta}">Perfil</a>
 					<a th:href="@{/logout}">Cerrar Sesion</a>
-				</nav>
-			</div>
-		</div>
-		
-		<div class="contenedor contenedor-listVehiculos">
-			<h1>Mis Vehículos</h1>
-			<div class="boton seccion">
-				<a th:href="@{/vehiculos/new}">Nuevo vehiculo</a>
-			</div>
-			<table class="contenedor-table">
-				<thead>
-					<tr>
-						<th>Id</th>
-						<th>Placa</th>
-						<th>Marca</th>
-						<th>Modelo</th>
-						<th>Operación</th>
-					</tr>
-				</thead>
-				<tbody th:if="${listVehiculos.size()} == 0">
-					<tr>
-						<td style="text-align: center;" colspan="5">No exiten registros</td>
-					</tr>
-				</tbody>
-				<tbody>
-					<tr th:each="veh: ${listVehiculos}">
-						<td th:text="${veh.codigo}"></td>
-						<td th:text="${veh.placa}"></td>
-						<td th:text="${veh.marca}"></td>
-						<td th:text="${veh.modelo}"></td>
-						<td>
-							<a th:href="@{/vehiculos/delete?id=} + ${veh.codigo}"><i class="fas fa-trash-alt"></i></a>
-							<a th:href="@{/vehiculos/update/} + ${veh.codigo}"><i class="fas fa-edit"></i></a>
-						</td>
-					</tr>
-				</tbody>
-		
-			</table>
-		</div>
+                </nav>
+                <div class="menu-perfil">
+                    <p th:text="${usuarioSesion.username}"></p>
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="fondo-imagen-registro-cliente">
+        <div class="hero-registro color-listado-clientes detalle-padding">
+            <div class="contenedor contenedor-consultas">
+                <h2>Mis Vehiculos</h2>
+                <p>Visualiza todos tus vehiculos registrados</p>
+                <form action="">
+                    <div class="buscador">
+                        <input type="search" name="search" id="search" value="Buscar vehiculo">
+                        <input type="submit" value="Buscar">
+                        <a th:href="@{/vehiculos/new}">Nuevo vehiculo</a>
+                    </div>
+                    
+                    <div class="contenedor-table">
+                        <table class="table-consultas">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+									<th>Placa</th>
+									<th>Marca</th>
+									<th>Modelo</th>
+									<th>Operación</th>
+                                </tr>
+                            </thead>
+                            <tbody th:if="${listVehiculos.size()} == 0">
+								<tr>
+									<td style="text-align: center;" colspan="5">No exiten registros</td>
+								</tr>
+							</tbody>
+                            <tbody>
+								<tr th:each="veh: ${listVehiculos}">
+									<td th:text="${veh.codigo}"></td>
+									<td th:text="${veh.placa}"></td>
+									<td th:text="${veh.modelo.marca.nombre}"></td>
+									<td th:text="${veh.modelo.nombre}"></td>
+									<td>
+										<a th:href="@{/vehiculos/delete?id=} + ${veh.codigo}"><i class="fas fa-trash-alt"></i></a>
+										<a th:href="@{/vehiculos/update/} + ${veh.codigo}"><i class="fas fa-edit"></i></a>
+									</td>
+								</tr>
+							</tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script src="../js/app.js"></script>
 </body>
 
 </html>

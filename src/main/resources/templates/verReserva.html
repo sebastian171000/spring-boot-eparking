@@ -51,11 +51,11 @@
                         <h3>Datos del vehiculo</h3>
                         <div class="fila-detalle">
                         	<p>Marca:</p>
-                            <p th:text="*{vehiculo.marca}"></p>
+                            <p th:text="*{vehiculo.modelo.marca.nombre}"></p>
                         </div>
                         <div class="fila-detalle">
                         	<p>Modelo:</p>
-                            <p th:text="*{vehiculo.modelo}"></p>
+                            <p th:text="*{vehiculo.modelo.nombre}"></p>
                         </div>
                         <div class="fila-detalle">
                         	<p>Placa:</p>
@@ -87,7 +87,7 @@
 
                     <div class="imagen-detalle centrar-text">
  						<!--<img th:src="@{*{'/img/' + usuario.imagen}}" title="TODO" />-->
- 						<img th:src="@{*{'/multipartFile/' + vehiculo.usuario.imagen}}" title="TODO" />
+ 						<img th:if="*{vehiculo.usuario.imagen}" th:src="@{*{'/multipartFile/' + vehiculo.usuario.imagen}}" title="TODO" />
 
                     </div>
 
@@ -123,11 +123,11 @@
 	                        <h3>Datos del Vehiculo</h3>
 	                        <div class="fila-detalle">
 	                        	<p>Marca:</p>
-	                            <p th:text="*{vehiculo.marca}"></p>
+	                            <p th:text="*{vehiculo.modelo.marca.nombre}"></p>
 	                        </div>
 	                        <div class="fila-detalle">
 	                        	<p>Modelo:</p>
-	                            <p th:text="*{vehiculo.modelo}"></p>
+	                            <p th:text="*{vehiculo.modelo.nombre}"></p>
 	                        </div>
 	                        <div class="fila-detalle">
 	                        	<p>Placa:</p>

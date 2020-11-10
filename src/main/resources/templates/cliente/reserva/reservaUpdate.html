@@ -40,7 +40,8 @@
                             <div class="input-credito">
                                 <label for="vehiculo">Vehículo: </label>
 								<select id="vehiculo" name="vehiculo">
-									<option th:each="veh: ${listVehiculos}" th:text="${veh.modelo.nombre}" th:value="${veh.codigo}"></option>
+									<option th:each="veh: ${listVehiculos}" th:text="${veh.modelo.nombre}" th:value="${veh.codigo}"
+									th:selected="${veh.codigo eq reserva.vehiculo.codigo}"></option>
 								</select>
                             </div>
 
@@ -48,20 +49,19 @@
                                 <label for="estacionamiento">Estacionamiento: </label>
 								<select id="estacionamiento" name="estacionamiento">
 									<option th:each="est, iStat : ${listEstacionamientos}" 
-									th:text="${est.direccion}+' | '+${est.distrito.nombre}+' | S/'+${est.tarifa}" 
+									th:text="${est.direccion}+' | '+${est.espacios}+' | S/'+${est.tarifa}" 
 									th:value="${est.codigo}" 
 									th:class="${iStat.index + 1}+' '+${est.horaApertura}+' '+${est.horaCierre}+' '+
-									${est.anticipacionHoras}+' '+${est.anticipacionDias}+' '+${est.espacios_disponibles}" 
+									${est.anticipacionHoras}+' '+${est.anticipacionDias}" 
 									id="option" 
-									th:selected="${est.codigo eq es}"></option>
+									th:selected="${est.codigo eq reserva.estacionamiento.codigo}"></option>
 									
 								</select>
 								<div id="log"></div>
-								<div id="log2"></div>
                             </div>
 							<div class="input-credito">
                                 <label for="fechaReserva">Fecha: </label>
-								<input  type="date" id="fechaReserva" name="fechaReserva">
+								<input  type="date" id="fechaReserva" name="fechaReserva" th:value="${#dates.format(reserva.fechaReserva, 'yyyy-MM-dd')}">
 								<p id="validarFecha"></p>
 								
                             </div>
@@ -72,12 +72,13 @@
 
                             <div class="input-credito">
                                 <label for="hora">Hora:</label>
-								<input type="text" name="hora" class="timepicker hora" readonly>
-								<input type="text" name="hora" class="timepicker2 hora" readonly>
+								<input type="text" name="hora" class="timepicker hora" th:value="${reserva.hora}" readonly>
+								<input type="text" name="hora" class="timepicker2 hora" th:value="${reserva.hora}" readonly>
+								<p th:text="'La hora que habia seleccionado anteriormente es: '+${reserva.hora}+', si desea mantenerla vuelvala a seleccionar porfavor'"></p>
                             </div>
                             <div class="input-credito">
                                 <label for="nhora">N°horas:</label>
-								<input type="number" name="nhoras" value="1" min="1" max="16" class="nhoras">
+								<input type="number" name="nhoras" th:value="${reserva.nhoras}" value="1" min="1" max="16" class="nhoras">
                            </div>
                         </div>
                     </div>
@@ -85,7 +86,15 @@
                         <input type="submit" id="submit_nueva_reserva" th:value="${boton}" ></input>
 						<a th:href="@{/reservas/list}" >Cancelar</a>
                     </div>
-                   
+                    <!-- A QUE HORA ABRE -->
+                    <input type="hidden" value="7:00" class="minTime" name="minTime">
+                    <!-- A QUE HORA CIERRA -->
+                    <input type="hidden" value="23:00" class="maxTime" name="maxTime">
+                    <!-- CUANTAS HORAS DE ANTICIPACION EN CASO SE PUEDA RESERVAR HOY MISMO -->
+                    <input type="hidden" value="1" class="anticipacionHoras" name="anticipacionHoras">
+                    <!-- CUANTOS DIAS DE ANTICIPACION PARA RESERVAR -->
+                    <input type="hidden" value="0" class="anticipacionDias" name="anticipacionDias">
+					<input type="hidden" th:field="*{codigo}">
                 </form>
             </div>
         </div>

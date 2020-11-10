@@ -5,30 +5,130 @@
 	<link th:href="@{/css/styles.css}" rel="stylesheet">
 	<link th:href="@{/css/normalize.css}" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/a0e0d9b7b0.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 </head>
 <meta charset="UTF-8"></meta>
 
-<body>
-	<div class="grid-contenedor">
-		<div class="hero-nav">
-			<div class="padre-navegacion">
-				<nav class="navegacion">
-					<a th:href="@{/home}">Inicio</a>
+<body class="overflow-hidden">
+
+    <header class="hero-header-menu desktop">
+        <div class="contenedor contenedor-menu">
+            <div class="contenido-menu">
+                <nav class="menu">
+                    <a th:href="@{/home}">Inicio</a>
 					<a th:href=@{/reservas/list}>Reservas</a>
-					<a th:href="@{/home}">Estacionamiento</a>
-					<a th:href="@{/home}">Perfil</a>
+					<a th:href="@{/estacionamiento}">Estacionamiento</a>
+					<a th:href="@{/cuenta}">Perfil</a>
 					<a th:href="@{/logout}">Cerrar Sesion</a>
-				</nav>
-			</div>
-		</div>
-		<div class="contenedor contenedor-index">
-			<h2 th:text="Bienvenido+' '+${nombres}+' '+${apellidos}"></h2>
-			<p>¿Listo para comenzar el día?</p>
-			<a th:href="@{/reservas/list}">Gestionar Reservas</a>
-		</div>
-	</div>
-	
-	
+                </nav>
+                <div class="menu-perfil">
+                    <p th:text="${username}"></p>
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="fondo-imagen-registro-cliente home-administrador">
+        <div class="hero-registro fondo-home color-listado-clientes">
+            <div class="contenedor contenedor-home">
+				<h2 th:text="'Bienvenid@'+' '+${nombres}+' '+${apellidos}"></h2>
+				<p>¿List@ para comenzar el día? Puedes actualizar estos datos cuando gustes.</p>
+				<form th:action="@{/espacios-disponibles/update}" method="post">
+					<div>
+						<label>Espacios disponibles:</label>
+						<input type="number" th:value="${estacionamientoActual.espacios_disponibles}" 
+						name="espaciosD">
+						<p th:if="${error}" th:text="${error}"></p>
+					</div>
+					<div>
+						<label>Días de anticipación para reservar:</label>
+						<input type="number" min="0" th:value="${estacionamientoActual.anticipacionDias}" 
+						name="anticipacionDias" class="anticipacionDias">
+						<p th:if="${error2}" th:text="${error2}"></p>
+					</div>
+					<div  class="anticipacionHoras">
+						<label>Hora de anticipación:</label>
+						<input type="number" min="1" max="12" th:value="${estacionamientoActual.anticipacionHoras}" 
+						name="anticipacionHoras">
+						<p th:if="${error3}" th:text="${error3}"></p>
+					</div>
+					<div>
+						<label>Hora de Apertura:</label>
+						<input type="text" th:value="${estacionamientoActual.horaApertura}" 
+						name="horaApertura" class="horaApertura" readonly>
+						<p th:if="${error4}" th:text="${error4}"></p>
+					</div>
+					<div>
+						<label>Horas de Cierre:</label>
+						<input type="text" th:value="${estacionamientoActual.horaCierre}" 
+						name="horaCierre" class="horaCierre" readonly>
+						<p th:if="${error5}" th:text="${error5}"></p>
+					</div>
+					<p th:if="${error6}" th:text="${error6}"></p>
+					<input type="submit" value="Actualizar">
+				</form>
+				<a th:href="@{/reservas/list}">Gestionar Reservas</a>
+            </div>
+        </div>
+    </div>
+	<div th:if="${permiso}" class="permiso" th:text="${permiso}"></div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <script>
+	if($('.permiso').length > 0){
+    	var permiso = $('.permiso').text();
+		Swal.fire({
+	        title: 'Permiso denegado!',
+	        icon: 'info',
+	        html: `<p>Solo tienen acceso los usuarios de tipo ${permiso}</p>`,
+	        confirmButtonText: 'Aceptar',
+	        customClass: 'swal-wide-registro-alerta',
+	        
+	    })
+	}
+    var anticipacionDias = $('.anticipacionDias').val();
+    if(anticipacionDias > 0){
+        //$('.anticipacionHoras').hide();
+        $('.anticipacionHoras label').hide();
+        $('.anticipacionHoras input').attr('type','hidden');
+        
+    }
+    $('.anticipacionDias').change(function(){
+        var anticipacionDias = $(this).val();
+        if(anticipacionDias == 0){
+           // $('.anticipacionHoras').show();
+           $('.anticipacionHoras label').show();
+        	$('.anticipacionHoras input').attr('type','number');
+        }else{
+        	//$('.anticipacionHoras').hide();
+        	$('.anticipacionHoras label').hide();
+        	$('.anticipacionHoras input').attr('type','hidden');
+        }
+     });
+    $('.horaApertura').timepicker({
+        timeFormat: 'HH:mm',
+        interval: 60,
+        minTime: '0',
+        maxTime: '23',
+        //defaultTime: '11',
+        //startTime: '4',
+        dynamic: false,
+        dropdown: true,
+        scrollbar: true
+    });
+    $('.horaCierre').timepicker({
+        timeFormat: 'HH:mm',
+        interval: 60,
+        minTime: '00',
+        maxTime: '23',
+        //defaultTime: '11',
+        //startTime: '4',
+        dynamic: false,
+        dropdown: true,
+        scrollbar: true
+    });
+    </script>
 </body>
 
 </html>
