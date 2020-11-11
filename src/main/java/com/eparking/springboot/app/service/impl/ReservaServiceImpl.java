@@ -1,5 +1,6 @@
 package com.eparking.springboot.app.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,11 @@ public class ReservaServiceImpl implements IReservaService {
 	@Override
 	public List<Reserva> listByUserVehiculoHistorial(Usuario usuario) {
 		return reR.listByUserVehiculoHistorial(usuario);
+	}
+
+	@Override
+	public List<Reserva> listByFecha(Date fecha1) {
+		return reR.listByFecha(fecha1);
 	}
 
 }

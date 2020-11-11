@@ -47,4 +47,10 @@ public class VehiculoServiceImpl implements IVehiculoService {
 		return veR.listByUser(usuario);
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public List<Vehiculo> listByMarcaPlaca(String busqueda) {
+		return veR.listByMarcaPlaca(busqueda);
+	}
+
 }
