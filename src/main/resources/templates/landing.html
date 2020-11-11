@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link th:href="@{/css/landing.css}" rel="stylesheet">
+	<link th:href="@{/css/normalize.css}" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a0e0d9b7b0.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+</head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header class="header-desktop">
+    <div class="hero-header">
+        <div class="contenedor">
+            <div class="contenido-header-superior">
+                <a th:href="@{/landing}">
+                    <img th:src="@{/img/logoeparking.png}" alt="">
+                </a>
+                <div class="contenedor-idiomas-sociales">
+                    <nav class="redes-sociales-header" style="margin-right:6rem;">
+                        <a href="#"><img th:src="@{/img/facebook.png}" alt=""></a>
+                        <a href="#"><img th:src="@{/img/in.png}" alt=""></a>
+                        <a href="#"><img th:src="@{/img/twitter.png}" alt=""></a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-header-nav">
+        <!-- <div class="contenedor"> -->
+            <div class="contenido-header-inferior contenedor">
+                <a th:href="@{/landing}">
+                    <img th:src="@{/img/logoeparkingNEGRO.png}" alt="">
+                </a>
+                <nav class="navegacion-principal">              
+                	<a data-scroll href="#servicio">SERVICIO</a>
+                	<a data-scroll href="#beneficios">BENEFICIOS</a>
+                	<a data-scroll href="#cobertura">COBERTURA</a>
+                	<a data-scroll href="#contacto">CONTACTO</a>
+                	<a style="color: #ffdc19; font-size: 18px; margin-bottom: 5px;" th:href="@{/login}">¡Empezar!</a>
+                </nav>
+            </div>
+
+        </div>
+    <!-- </div> -->
+</header>
+<header class="header-mobile">
+    <div class="hero-header-mobile">
+        <div class="contenedor">
+            <div class="contenido-header-mobile">
+                <div class="logo-mobile">
+                     <a th:href="@{/landing}">
+                    	<img th:src="@{/img/logoeparking.png}" alt="">
+                	</a>
+                </div>
+                <div class="menu-bar">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-header-nav">
+        <div class="contenedor">
+            <nav class="contenido-header-nav">
+                <a data-scroll href="#servicio">SERVICIO</a>
+               	<a data-scroll href="#beneficios">BENEFICIOS</a>
+               	<a data-scroll href="#cobertura">COBERTURA</a>
+               	<a data-scroll href="#contacto">CONTACTO</a>
+               	<a data-scroll href="#noticias">NOTICIAS Y CONOCIMIENTOS</a>
+
+            </nav>
+            <nav class="redes-sociales-header">
+                <a href="#"><img th:src="@{/img/facebook.png}" alt=""></a>
+                <a href="#"><img th:src="@{/img/in.png}" alt=""></a>
+                <a href="#"><img th:src="@{/img/twitter.png}" alt=""></a>
+            </nav>
+
+        </div>
+    </div>
+</header>
+
+
+<!-- Swiper -->
+<div class="swiper-container banners">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide banners swiper-hero1 p-relative capa-oscura">
+            <div class="contenido-swiper estilos-banner swiper1">
+	            <h2 data-swiper-parallax="-3000" data-swiper-parallax-opacity="0">DESCUBRE E-PARKING</h2>
+	            <div class="text" data-swiper-parallax="-2000" data-swiper-parallax-opacity="0">
+	                <p>TU ALIADO EN LA BÚSQUEDA DE ESTACIONAMIENTOS</p>
+	            </div>
+            </div>
+        </div>
+        <div class="swiper-slide banners swiper-hero2 p-relative capa-oscura">
+            <div class="contenido-swiper estilos-banner swiper2">
+	            <h2 data-swiper-parallax="-3000" data-swiper-parallax-opacity="0">DESCUBRE E-PARKING</h2>
+	            <div class="text" data-swiper-parallax="-2000" data-swiper-parallax-opacity="0">
+	                <p>TU ALIADO EN LA BÚSQUEDA DE ESTACIONAMIENTOS</p>
+	            </div>
+            </div>
+        </div>
+        <div class="swiper-slide banners swiper-hero3 p-relative capa-oscura">
+            <div class="contenido-swiper estilos-banner swiper3">
+	            <h2 data-swiper-parallax="-3000" data-swiper-parallax-opacity="0">DESCUBRE E-PARKING</h2>
+	            <div class="text" data-swiper-parallax="-2000" data-swiper-parallax-opacity="0">
+	                <p>TU ALIADO EN LA BÚSQUEDA DE ESTACIONAMIENTOS</p>
+	            </div>
+            </div>
+        </div>
+    </div>
+   <!-- Add Pagination -->
+   <div class="swiper-pagination"></div>
+</div>
+
+<!-- NUESTRO SERVICIO -->
+	<div class="hero-soluciones">
+    <div  class="contenedor" id="servicio" data-scroll>
+        <div data-aos="fade-up" class="titulo-h3 seccion">
+        	<h3>NUESTRO SERVICIO</h3>
+        </div>
+        <div data-aos="fade-up" class="contenido-soluciones">
+           <div class="servicio">
+           		<i class="fas fa-car"></i>
+           		<h5>¿QUÉ ES?</h5>
+           		<p>Con E-parking podrás ubicar nuestros<br> estacionamientos, ver disponibilidad,<br> controlar tu tiempo y pagar.
+           		<br>¡Todo desde un solo lugar!</p>
+           </div>
+           <div class="servicio">
+           		<i class="fas fa-laptop"></i>
+           		<h5>¿COMO OBTENERLA?</h5>
+           		<p>Con E-parking podrás ubicar nuestros<br> estacionamientos, ver disponibilidad,<br> controlar tu tiempo y pagar.
+           		<br>¡Todo desde un solo lugar!</p>
+           </div>
+           <div class="servicio">
+           		<i aria-hidden="true" class="fas fa-chart-pie"></i>
+           		<h5>AUMENTA TU PRODUCTIVIDAD</h5>
+           		<p>Con E-parking podrás ubicar nuestros<br> estacionamientos, ver disponibilidad,<br> controlar tu tiempo y pagar.
+           		<br>¡Todo desde un solo lugar!</p>
+           </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- NUESTROS BENEFICIOS -->
+	<div class="hero-beneficios">
+    <div  class="contenedor" id="beneficios" data-scroll>
+ 
+        <div class="contenido-beneficios">
+           <div data-aos="fade-right" class="beneficio-padre">
+           		<img alt="" th:src="@{img/19199054.jpg}">
+           </div>
+           <div  class="benefico-padre">
+           		<h3 data-aos="fade-down">NUESTROS <span>BENEFICIOS</span></h3>
+           		<div data-aos="fade-up" class="beneficio">
+           			<i class="fas fa-check-circle"></i>
+           			<div class="beneficio-texto">
+           				<h5>SIN COLAS</h5>
+           				<p>Asocia tus tarjetas de débito/crédito y paga<br> desde la comodidad de tu celular</p>
+           			</div>
+           		</div>
+           		<div data-aos="fade-up" class="beneficio">
+           			<i class="fas fa-check-circle"></i>
+           			<div class="beneficio-texto">
+           				<h5>AHORRA TU TIEMPO</h5>
+           				<p>Asocia tus tarjetas de débito/crédito y paga<br> desde la comodidad de tu celular</p>
+           			</div>
+           		</div>
+           		<div data-aos="fade-up" class="beneficio">
+           			<i class="fas fa-check-circle"></i>
+           			<div class="beneficio-texto">
+           				<h5>¡ESTACIONATE EN UNA!</h5>
+           				<p>Asocia tus tarjetas de débito/crédito y paga<br> desde la comodidad de tu celular</p>
+           			</div>
+           		</div>
+           </div>
+           
+        </div>
+    </div>
+</div>
+	
+	
+<!-- COBERTURA DE E-PARKING -->
+<div class="hero-soluciones">
+    <div  class="contenedor" id="cobertura" data-scroll>
+        <h3 data-aos="flip-left">COBERTURA DE E-PARKING</h3>
+        <div data-aos="flip-left" class="cobertura">
+        	<i class="fas fa-map-marker-alt"></i>
+        	<p>MIRAFLORES</p>
+        </div>
+        <div data-aos="flip-left" class="cobertura">
+        	<i class="fas fa-map-marker-alt"></i>
+        	<p>SAN ISIDRO</p>
+        </div>
+    </div>
+</div>
+	
+<!-- SECCION CONTACTANOS -->
+<div class="hero-formulario2">    
+    <div data-aos="fade-up" class="titulo-h3 seccion">
+        <h3>Contáctanos</h3>
+    </div>
+    <nav data-aos="fade-left" class="redes-sociales-header" style="text-align:center;">
+        <a href="#"><img th:src="@{/img/facebook-azul.png}" alt=""></a>
+        <a href="#"><img th:src="@{/img/in-azul.png}" alt=""></a>
+        <a href="#"><img th:src="@{/img/twitter-azul.png}" alt=""></a>
+    </nav>
+
+    <div class="contenedor-formulario">
+        <img class="imagen-formulario" th:src="@{/img/car-park.jpg}" alt="">
+        <div class="hero-formulario" id="contacto" data-scroll>
+            <div data-aos="fade-up" class="contenido-form">
+               <form action="" method="post">
+                   <input id="nombre" type="text" name="nombre" placeholder="Nombre: ">
+                   <input id="empresa" type="text" name="empresa" placeholder="Empresa: ">
+                   <input id="email" type="email" name="email" placeholder="Email: ">
+                   <input id="telefono" type="text" name="telefono" placeholder="Telefono:(opcional) ">
+                   <textarea placeholder="Mensaje:" name="mensaje" id="mensaje" cols="30" rows="10"></textarea>
+                   <div class="right">
+                   <input id="enviar" type="submit" value="Enviar">
+                   </div>
+
+               </form>
+            </div>
+            <hr data-aos="fade-up">
+            <div data-aos="fade-up" class="contenedor-swiper-formulario">
+                <div class="swiper-container4">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="contenedor-informacion-formulario">
+                                <div class="informacion">
+                                    <h5>Oficina Corporativas Lima</h5>
+                                    <p>Calle Goberbador Agustín Vicente<br>
+                                    Eguía 46 Col. San Miguel Chapultepec<br>
+                                    I sección Ciudad de México<br>
+                                    Tel: +52 (55) 5545-6352</p>
+                                </div>
+                                <div class="informacion">
+                                    <h5>Oficina Corporativas Lima</h5>
+                                    <p>Calle Goberbador Agustín Vicente<br>
+                                    Eguía 46 Col. San Miguel Chapultepec<br>
+                                    I sección Ciudad de México<br>
+                                    Tel: +52 (55) 5545-6352</p>
+                                </div>
+                                <div class="informacion">
+                                    <h5>Oficina Corporativas Lima</h5>
+                                    <p>Calle Goberbador Agustín Vicente<br>
+                                    Eguía 46 Col. San Miguel Chapultepec<br>
+                                    I sección Ciudad de México<br>
+                                    Tel: +52 (55) 5545-6352</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="contenedor-informacion-formulario">
+                                <div class="informacion">
+                                    <h5>Oficina Corporativas Lima</h5>
+                                    <p>Calle Goberbador Agustín Vicente<br>
+                                    Eguía 46 Col. San Miguel Chapultepec<br>
+                                    I sección Ciudad de México<br>
+                                    Tel: +52 (55) 5545-6352</p>
+                                </div>
+                                <div class="informacion">
+                                    <h5>Oficina Corporativas Lima</h5>
+                                    <p>Calle Goberbador Agustín Vicente<br>
+                                    Eguía 46 Col. San Miguel Chapultepec<br>
+                                    I sección Ciudad de México<br>
+                                    Tel: +52 (55) 5545-6352</p>
+                                </div>
+                                <div class="informacion">
+                                    <h5>Oficina Corporativas Lima</h5>
+                                    <p>Calle Goberbador Agustín Vicente<br>
+                                    Eguía 46 Col. San Miguel Chapultepec<br>
+                                    I sección Ciudad de México<br>
+                                    Tel: +52 (55) 5545-6352</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>	
+
+<!-- FOOTER -->
+
+<footer class="hero-footer">
+    <div class="contenedor">
+        <div class="contenido-footer">
+            <div class="footer">
+                <img style="width: 50%;" th:src="@{/img/logoeparking.png}" alt="">
+                <p><strong>Lorem</strong>-<strong>Ipsum</strong>-<strong>Amet</strong>-<strong>Turpis</strong>-<strong>Lima</strong></p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dapibus, turpis ac congue molestie,
+                 augue lacus sollicitudin diam, quis tristique libero tellus ac odio.</p>
+            </div>
+           
+            <div class="footer" style="text-align:left;">
+                <p>Contacto:</p>
+                <div class="footer-telefono" style="text-align:left;margin-bottom: -34px;margin-top: -24px;">
+                    <i class="fas fa-phone-alt"></i>
+                    <p>55 5456352</p>
+                </div>
+                <div class="footer-email">
+                    <i class="fas fa-envelope"></i>
+                    <p>contacto@eparking.com</p>
+                </div>
+                <nav class="redes-sociales-header" style="text-align:left;">
+                    <a href="#"><img th:src="@{/img/facebook.png}" alt=""></a>
+	                <a href="#"><img th:src="@{/img/in.png}" alt=""></a>
+	                <a href="#"><img th:src="@{/img/twitter.png}" alt=""></a>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <nav class="navegacion-footer">
+            <div class="contenedor">
+				<a data-scroll href="#servicio">SERVICIO</a>
+               	<a data-scroll href="#beneficios">BENEFICIOS</a>
+               	<a data-scroll href="#cobertura">COBERTURA</a>
+               	<a data-scroll href="#contacto">CONTACTO</a>
+            </div>
+        </nav>
+    </div>
+    
+    
+</footer>
+
+
+
+
+	<a target="_blank" href="https://wa.link/l2qgwk" class="btn-wsp">
+    	<img th:src="@{/img/WSP.png}" alt="">
+	</a>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/16.1.3/smooth-scroll.min.js"></script>
+	<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+	<script type="text/javascript" th:src="@{/js/landing.js}"></script>
+</body>
+
+</html>
