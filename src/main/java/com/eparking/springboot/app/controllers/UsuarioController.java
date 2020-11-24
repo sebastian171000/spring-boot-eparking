@@ -3,6 +3,7 @@ package com.eparking.springboot.app.controllers;
 
 import javax.validation.Valid;
 
+import org.jasypt.util.password.rfc2307.RFC2307MD5PasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,8 +46,11 @@ public class UsuarioController {
 	public String save(Usuario usuario, Model model,@RequestParam("imageFile") MultipartFile imageFile) throws Exception {
 		model.addAttribute("mensaje", "Se guardo correctamente el usuario");
 		usuario.setImagen(imageFile.getOriginalFilename());
+		RFC2307MD5PasswordEncryptor encrytor = new RFC2307MD5PasswordEncryptor();
+		String encryptedPassword = encrytor.encryptPassword(usuario.getClave());
+		usuario.setClave(encryptedPassword);
 		usService.insert(usuario,imageFile);
-		return "redirect:/login";
+		return "redirect:/login"; 
 	}
 	
 	@PostMapping("/registroEstacionamiento/save") 
@@ -57,6 +61,9 @@ public class UsuarioController {
 			model.addAttribute("mensaje", "Se guardo correctamente el usuario y estacionamiento");
 			estacionamiento.getUsuario().setTipo("A");
 			estacionamiento.setEspacios_disponibles(estacionamiento.getEspacios());
+			RFC2307MD5PasswordEncryptor encrytor = new RFC2307MD5PasswordEncryptor();
+			String encryptedPassword = encrytor.encryptPassword(estacionamiento.getUsuario().getClave());
+			estacionamiento.getUsuario().setClave(encryptedPassword);
 			if(!imageFile.getOriginalFilename().equals("")) {
 				estacionamiento.getUsuario().setImagen(imageFile.getOriginalFilename());
 				esService.insertWithImage(estacionamiento, imageFile);
