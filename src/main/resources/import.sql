@@ -1,5 +1,7 @@
-insert into distrito (nombre) values ('Miraflores'),('San Isidro')
-
+insert into distrito (nombre) values ('Miraflores'),('San Isidro');
+insert into usuario (apellidos,clave,correo,imagen,nombres,telefono,tipo,username) values ('Pajes Leon','{MD5}gdyb21LQTcIANtvYMT7QVQ==','smpl3000@gmail.com','curly-hair-bearded-guy-in-glasses-pointing-his-index-fingers-at-both-sides-on-yellow (1).jpg','Sebastian Manuel','987732072','C','sebas');
+insert into usuario (apellidos,clave,correo,imagen,nombres,telefono,tipo,username) values ('Cieza Romero','{MD5}gdyb21LQTcIANtvYMT7QVQ==','fabiola201811028@gmail.com','banner3e.jpg','Fabiola Irene','937712353','A','fabi');
+insert into estacionamiento (anticipacion_dias,anticipacion_horas,direccion,espacios,espacios_disponibles,hora_apertura,hora_cierre,tarifa,id_distrito,id_usuario) values (0,1,'Calle Isidoro Suarez 256',50,30,'7:00','22:00',4,2,2);
 /*INSERTAMOS DATOS DE MARCA */
 /* INSERT QUERY NO: 1 */
 INSERT INTO marca (Nombre) VALUES ('Abarth');
@@ -2475,3 +2477,4 @@ INSERT INTO modelo (nombre, id_marca ) VALUES ('Countryman', 53)
 /* INSERT QUERY NO: 745 */
 INSERT INTO modelo (nombre, id_marca ) VALUES ('Paceman', 53)
 
+insert into vehiculo (placa, id_modelo, id_usuario) values ('baz001', 51, 1), ('baz009', 33, 1), ('asd123', 77, 1);
