@@ -51,7 +51,7 @@
 									th:text="${est.direccion}+' | '+${est.distrito.nombre}+' | S/'+${est.tarifa}" 
 									th:value="${est.codigo}" 
 									th:class="${iStat.index + 1}+' '+${est.horaApertura}+' '+${est.horaCierre}+' '+
-									${est.anticipacionHoras}+' '+${est.anticipacionDias}+' '+${est.espacios_disponibles}" 
+									${est.anticipacionHoras}+' '+${est.anticipacionDias}+' '+${est.espacios_disponibles}+' '+${est.usuario.nombres}" 
 									id="option" 
 									th:selected="${est.codigo eq es}"></option>
 									

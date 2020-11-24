@@ -8,7 +8,7 @@
 </head>
 <meta charset="UTF-8"></meta>
 
-<body class="overflow-hidden">
+<body class="overflow-hidden listReservas">
 
     <header class="hero-header-menu desktop">
         <div class="contenedor contenedor-menu">
@@ -41,16 +41,16 @@
                 <p>Visualiza todos tus reservas aquí.</p>
                 <form action="">
                     <div class="buscador">
-                        <input type="search" name="search" id="search" value="Buscar establecimiento">
-                        <input type="submit" value="Buscar">
+                        <!--<input type="search" name="search" id="search" value="Buscar establecimiento">
+                        <input type="submit" value="Buscar">-->
                         
 						<a th:if="${usuarioSesion.tipo} == 'C'" th:href="@{/reservas/new/1}">Nuevo reserva</a>
                     </div>
                     <div class="filtros">
-                        <label for="fecha_inicio">De:</label>
+                        <!--<label for="fecha_inicio">De:</label>
                         <input type="date" name="fecha_inicio">
                         <label for="fecha_fin">hasta:</label>
-                        <input type="date" name="fecha_fin">
+                        <input type="date" name="fecha_fin">-->
                         <a th:href="@{/reservas/list}">Reservas pendientes</a>
 						<a th:href="@{/reservas/listHistorial}">Historial de Reservas</a>
                     </div>
@@ -60,7 +60,6 @@
 								<tr>
 									<th>Id</th>
 									<th>Dirección</th>
-									
 									<th>Vehiculo(placa)</th>
 									<th>Fecha</th>
 									<th>Hora</th>

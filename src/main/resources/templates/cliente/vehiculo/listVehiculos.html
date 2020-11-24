@@ -8,7 +8,7 @@
 </head>
 <meta charset="UTF-8"></meta>
 
-<body class="overflow-hidden">
+<body class="overflow-hidden listVehiculos">
 
     <header class="hero-header-menu desktop">
         <div class="contenedor contenedor-menu">
@@ -32,15 +32,16 @@
             <div class="contenedor contenedor-consultas">
                 <h2>Mis Vehiculos</h2>
                 <p>Visualiza todos tus vehiculos registrados</p>
-                <form action="">
+                <form th:action="@{/vehiculos/buscar}" >
                     <div class="buscador">
-                        <input type="search" name="search" id="search" value="Buscar vehiculo">
+                        <input type="search" name="busqueda" id="search" placeholder="Buscar vehiculo">
                         <input type="submit" value="Buscar">
-                        <a th:href="@{/vehiculos/new}">Nuevo vehiculo</a>
+                        <a th:href="@{/vehiculos/list}">Limpiar</a>
+                        <a th:href="@{/vehiculos/new/0}">Nuevo vehiculo</a>
                     </div>
                     
                     <div class="contenedor-table">
-                        <table class="table-consultas">
+                        <table th:if="${listVehiculos != null}" class="table-consultas">
                             <thead>
                                 <tr>
                                     <th>Id</th>
@@ -57,6 +58,35 @@
 							</tbody>
                             <tbody>
 								<tr th:each="veh: ${listVehiculos}">
+									<td th:text="${veh.codigo}"></td>
+									<td th:text="${veh.placa}"></td>
+									<td th:text="${veh.modelo.marca.nombre}"></td>
+									<td th:text="${veh.modelo.nombre}"></td>
+									<td>
+										<a th:href="@{/vehiculos/delete?id=} + ${veh.codigo}"><i class="fas fa-trash-alt"></i></a>
+										<a th:href="@{/vehiculos/update/} + ${veh.codigo}"><i class="fas fa-edit"></i></a>
+									</td>
+								</tr>
+							</tbody>
+                        </table>
+                        
+                        <table th:if="${listVehiculosByMarcaModelo != null}" class="table-consultas">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+									<th>Placa</th>
+									<th>Marca</th>
+									<th>Modelo</th>
+									<th>Operación</th>
+                                </tr>
+                            </thead>
+                            <tbody th:if="${listVehiculosByMarcaModelo.size()} == 0">
+								<tr>
+									<td style="text-align: center;" colspan="5">No exiten registros</td>
+								</tr>
+							</tbody>
+                            <tbody>
+								<tr th:each="veh: ${listVehiculosByMarcaModelo}">
 									<td th:text="${veh.codigo}"></td>
 									<td th:text="${veh.placa}"></td>
 									<td th:text="${veh.modelo.marca.nombre}"></td>

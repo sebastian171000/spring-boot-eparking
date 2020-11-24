@@ -11,9 +11,10 @@ jQuery(document).ready($ => {
 		var split = clases.split(" ");
 		var index = split[0];
 		var espacios_disponibles = split[5];
+		var nombresAdmin = split[6] + ' ' + split[7];
 		var selectedOption = $(`#estacionamiento option:nth-child(${index})`);
 		log.html(`<a href="/reservas/detalleEstacionamiento/${sel.val()}">Ver detalle ${selectedOption.text()}</a>`);
-		log2.html(`Quedan ${espacios_disponibles} espacios disponibles`);
+		log2.html(`${nombresAdmin} espacios disponibles`);
 		//HORA_APERTURA
 		var minTimeInput = split[1];
 		//HORA_CIERRE
@@ -179,8 +180,8 @@ jQuery(document).ready($ => {
 		});
 	}	//FIN DE JS PARA RESERVAS/NEW
 	$('.btn-registrarse a').on('click', function() {
-        var linkCliente = 'registroCliente';
-        var linkAdmin = 'registroEstacionamiento';
+        var linkCliente = '/registroCliente';
+        var linkAdmin = '/registroEstacionamiento';
         Swal.fire({
             title: '¿Cómo desea registrarse?',
             showDenyButton: true,

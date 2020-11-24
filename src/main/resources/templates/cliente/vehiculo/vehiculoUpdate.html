@@ -37,7 +37,7 @@
                             <div class="input-credito">
                                 <label for="marca">Marca:</label>
 								<select id="marca" name="marca">
-									<option th:each="mar: ${listMarcas}" th:text="${mar.nombre}" th:value="${mar.codigo}"></option>
+									<option th:selected="${mar.codigo eq vehiculo.modelo.marca.codigo}" th:each="mar: ${listMarcas}" th:text="${mar.nombre}" th:value="${mar.codigo}"></option>
 								</select>
 								
                             </div>
@@ -46,13 +46,13 @@
                                 <label for="modelo">Modelo:</label>
 								<select id="modelo" name="modelo">
 									<option class="default" value="">--Please choose an option--</option>
-									<option th:class="${mo.marca.codigo}" th:each="mo: ${listModelos}" th:text="${mo.nombre}" th:value="${mo.codigo}"></option>
+									<option th:selected="${mo.codigo eq vehiculo.modelo.codigo}" th:class="${mo.marca.codigo}" th:each="mo: ${listModelos}" th:text="${mo.nombre}" th:value="${mo.codigo}"></option>
 								</select>
                             </div>
 
                             <div class="input-credito">
                                 <label for="placa">Placa:</label>
-								<input id="placa" type="text" name="placa">
+								<input id="placa" type="text" name="placa" th:value="*{placa}">
 								<p th:if="${error_placa}" th:text="${error_placa}"></p>
                             </div>
                         </div>
@@ -83,6 +83,7 @@
 			$('#modelo option').filter(`.${marca}`).show();
 			
 		});
+
 		$('#submit').on('click',function(e){
 			var marca = $('#marca').val();
 			var modelo = $('#modelo').val();
@@ -117,4 +118,5 @@
 		});
     </script>
 </body>
+
 </html>

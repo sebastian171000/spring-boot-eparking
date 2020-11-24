@@ -46,10 +46,10 @@
                                 <label for="modelo">Modelo:</label>
 								<select id="modelo" name="modelo">
 									<option class="default" value="">--Please choose an option--</option>
-									<option th:class="${mo.marca.codigo}" th:each="mo: ${listModelos}" th:text="${mo.nombre}" th:value="${mo.codigo}"></option>
+									<option th:selected="${mo.codigo eq modelo}"  th:class="${mo.marca.codigo}+' '+${mo.codigo}" th:each="mo: ${listModelos}" th:text="${mo.nombre}" th:value="${mo.codigo}"></option>
 								</select>
                             </div>
-
+                            <p th:if="${countModelo}" th:text="${countModelo}+' usuarios ocupan este modelo'"></p>
                             <div class="input-credito">
                                 <label for="placa">Placa:</label>
 								<input id="placa" type="text" name="placa">
@@ -71,6 +71,24 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script type="text/javascript">
+
+    var sel = $('#modelo');
+	var clases = $('select[name="modelo"] :selected').attr('class');
+	console.log(clases);
+	var split = clases.split(" ");
+	var marcaId = split[0];
+	var modeloId = split[1];
+    $('#modelo').change(function(){
+		
+		var clases = $('select[name="modelo"] :selected').attr('class');
+		var split = clases.split(" ");
+		var marcaId = split[0];
+		var modeloId = split[1];
+		console.log(clases);
+		$(location).attr('href', modeloId);
+	});
+	
+	
     	$('#modelo option').hide();
     	$('.default').show();
     	var marca = $('#marca').val();
