@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 //import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotEmpty;
 
@@ -28,6 +30,7 @@ public class Reserva implements Serializable {
 	private int codigo;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
 	//@FutureOrPresent
 	@Column(name="FechaReserva")
 	private Date fechaReserva;

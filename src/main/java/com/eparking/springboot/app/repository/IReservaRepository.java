@@ -1,5 +1,6 @@
 package com.eparking.springboot.app.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -30,6 +31,12 @@ public interface IReservaRepository extends JpaRepository<Reserva, Integer> {
 	@Query("select r from Reserva r where r.vehiculo.usuario =:usuario and (r.estado = 'Rechazado'"
 			+ " or r.estado = 'Finalizado')")
 	public List<Reserva> listByUserVehiculoHistorial(@Param("usuario") Usuario usuario);
+	
+	/*@Query("select r from Reserva r where r.fechaReserva >= :fecha1 and r.fechaReserva <= :fecha2")
+	public List<Reserva> listByFecha(@Param("fecha1") Date fecha1, @Param("fecha2") Date fecha2);*/
+	
+	@Query("select r from Reserva r where r.fechaReserva =:fecha1")
+	public List<Reserva> listByFecha(@Param("fecha1") Date fecha1);
 	
 	
 } 

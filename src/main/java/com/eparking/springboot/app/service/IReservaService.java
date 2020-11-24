@@ -1,5 +1,6 @@
 package com.eparking.springboot.app.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.eparking.springboot.app.entity.Reserva;
@@ -14,5 +15,6 @@ public interface IReservaService {
 	public List<Reserva> listByUserEstacionamiento(Usuario usuario);
 	public List<Reserva> listByUserEstacionamientoHistorial(Usuario usuario);
 	public List<Reserva> listByUserVehiculoHistorial(Usuario usuario);
+	public List<Reserva> listByFecha(Date fecha1);
 
 }

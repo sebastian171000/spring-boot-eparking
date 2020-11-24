@@ -11,4 +11,6 @@ public interface IVehiculoService {
 	List<Vehiculo> list();
 	public Vehiculo findOne(Integer idVehiculo);
 	List<Vehiculo> listByUser(Usuario usuario);
+	List<Vehiculo> listByMarcaPlaca(String busqueda);
+	int countByModelo(int idVehiculo); 
 }

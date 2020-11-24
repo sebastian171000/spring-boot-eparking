@@ -33,8 +33,8 @@ public class VehiculoController {
 	@Autowired
 	private IModeloService moService;
 	
-	@GetMapping("/new/{modelo}")
-	public String newVehiculo(@PathVariable(required = false) int modelo,@ModelAttribute("usuarioSesion") Usuario usuario,Model model,RedirectAttributes flash) {
+	@GetMapping("/new")
+	public String newVehiculo(@ModelAttribute("usuarioSesion") Usuario usuario,Model model,RedirectAttributes flash) {
 		if(usuario.getTipo().equals("A")) {
 			flash.addFlashAttribute("permiso", "cliente");
 			return "redirect:/home";
@@ -44,10 +44,7 @@ public class VehiculoController {
 		model.addAttribute("listModelos", moService.list());
 		model.addAttribute("boton","Guardar");
 		model.addAttribute("titulo","Nuevo Vehículo");
-		if(modelo > 0) {
-			model.addAttribute("modelo", modelo);
-			model.addAttribute("countModelo", veService.countByModelo(modelo));
-		}
+		
 
 		return "cliente/vehiculo/vehiculo";
 	}

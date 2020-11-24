@@ -53,4 +53,10 @@ public class VehiculoServiceImpl implements IVehiculoService {
 		return veR.listByMarcaPlaca(busqueda);
 	}
 
+	@Override
+	public int countByModelo(int idVehiculo) {
+		return veR.countByModel(idVehiculo);
+	}
+
+
 }

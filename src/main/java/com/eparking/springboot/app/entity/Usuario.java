@@ -26,7 +26,6 @@ public class Usuario implements Serializable {
 	@Column(name="username")
 	private String username;
 	
-	@Pattern(regexp = "^.{4,50}$", message = "Su contraseña debe tener como mínimo 4 caracteres")
 	@Column(name="clave")
 	private String clave;
 	
